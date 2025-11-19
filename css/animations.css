@@ -1,0 +1,23 @@
+/* ============================================= */
+/*       ANIMACIONES REUTILIZABLES DEL SITIO     */
+/* ============================================= */
+
+/*
+  Definición: button-press
+  Propósito:  Simula una micro-interacción de presión y liberación.
+  Uso:        Ideal para estados :hover o :active en elementos interactivos
+              como botones, tarjetas o caracteres de texto.
+  Optimización: Anima únicamente la propiedad 'transform', lo cual es altamente
+                eficiente y evita re-cálculos de layout por parte del navegador.
+*/
+@keyframes button-press {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px); /* Ajuste sutil para simular la presión */
+  }
+  100% {
+    transform: translateY(0);
+  }
+}

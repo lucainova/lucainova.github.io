@@ -1,0 +1,382 @@
+@import "animations.css";
+
+/* ============================================= */
+/*       VARIABLES GLOBALES Y SETUP BASE         */
+/* ============================================= */
+:root {
+  --color-dark: #210b01;
+  --color-shadow: #cc7048;
+  --color-light: #f8ebe4;
+  --font-title: "Bungee", sans-serif;
+  --font-text: "Tomorrow", sans-serif;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+body {
+  font-family: var(--font-text);
+  font-size: 1.6rem;
+  line-height: 1.6;
+  background-color: var(--color-dark);
+  color: var(--color-light);
+  overflow-x: hidden;
+}
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ============================================= */
+/*                 ESTILOS DEL HERO              */
+/* ============================================= */
+#hero {
+  min-height: 100vh;
+  width: 100%;
+  background: url("../assets/images/background-wall.png") no-repeat center
+    center;
+  background-size: cover;
+  background-attachment: fixed;
+  padding: 8rem 2rem 4rem 2rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.hero-header {
+  position: absolute;
+  top: 0;
+  left: 0; /* Abarca todo el ancho para un mejor control */
+  width: 100%;
+  padding: 1.5rem 0; /* Reducido para móviles */
+  z-index: 5;
+}
+/* FIX CRÍTICO: Se establece un "contenedor seguro" para la navegación */
+.hero-nav {
+  /* La navegación solo puede ocupar el 75% del ancho, dejando espacio para la cinta */
+  max-width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.hero-nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.hero-nav a {
+  font-family: var(--font-title);
+  color: var(--color-dark);
+  text-decoration: none;
+  font-size: 1.6rem; /* Ligeramente más pequeño en base móvil */
+  text-shadow: 1px 1px 0px var(--color-shadow);
+  transition: transform 0.3s ease, text-shadow 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.hero-nav a:hover {
+  transform: scale(1.1);
+  text-shadow: 2px 2px 0px var(--color-shadow),
+    -2px -2px 0px rgba(248, 235, 228, 0.5);
+  cursor: pointer;
+}
+.hero-content {
+  text-align: center;
+  width: 100%;
+}
+.hero-main {
+  margin-bottom: 4rem;
+}
+
+/* MEJORA: Animación añadida al perfil */
+.profile-image-container {
+  max-width: 180px;
+  margin: 0 auto 2rem auto;
+  border: 5px solid var(--color-dark);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 10px 10px 0 var(--color-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.profile-image-container:hover {
+  cursor: pointer;
+  animation: button-press 0.4s ease;
+}
+.profile-image-container img {
+  width: 100%;
+  display: block;
+}
+
+/* FIX CRÍTICO: clamp() re-calibrado para mejor fluidez */
+.hero-title,
+.hero-subtitle {
+  font-family: var(--font-title);
+  color: var(--color-dark);
+  line-height: 1.1;
+  text-shadow: 3px 3px 0px var(--color-shadow); /* Reducida para móviles */
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.hero-title {
+  /* Valor base más pequeño y escalado vw más suave */
+  font-size: clamp(3rem, 10vw, 8rem);
+}
+.hero-subtitle {
+  /* Valor base más pequeño y escalado vw más suave */
+  font-size: clamp(2.2rem, 8vw, 6rem);
+  margin-top: -0.5rem;
+}
+.char {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+.char:hover {
+  cursor: pointer;
+  animation: button-press 0.4s ease;
+}
+
+.hero-description {
+  background-color: transparent;
+  border: 5px solid var(--color-dark);
+  border-radius: 15px;
+  padding: 2rem;
+  max-width: 600px;
+  margin: 0 auto;
+  box-shadow: 10px 10px 0 var(--color-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.hero-description p {
+  color: var(--color-dark);
+  font-weight: bold;
+  font-size: 1.8rem;
+  line-height: 1.5;
+}
+.hero-description:hover {
+  cursor: pointer;
+  animation: button-press 0.4s ease;
+}
+
+.hero-ribbon {
+  position: absolute;
+  top: 0;
+  right: 20px;
+  height: 110px;
+  width: 50px;
+  background-color: var(--color-dark);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  z-index: 10;
+  box-shadow: 0 -50px 0 var(--color-dark);
+}
+.hero-ribbon::after {
+  content: "";
+  position: absolute;
+  bottom: -19px;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  background: var(--color-dark);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+.hero-ribbon:hover {
+  transform: translateY(5px);
+}
+
+/* (El CSS de los modales es robusto y no necesita cambios) */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1100;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  background-color: rgba(0, 0, 0, 0);
+}
+.modal-overlay.is-visible {
+  display: flex;
+  opacity: 1;
+}
+.modal-content {
+  background-color: rgba(248, 235, 228, 0.51);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 3px solid var(--color-dark);
+  border-radius: 15px;
+  padding: 3rem;
+  max-width: 500px;
+  width: 100%;
+  position: relative;
+  color: var(--color-dark);
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+.modal-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: 0 0;
+  border: none;
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--color-dark);
+  cursor: pointer;
+  line-height: 1;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+.modal-close-btn:hover {
+  transform: rotate(90deg);
+  color: var(--color-shadow);
+}
+.modal-title {
+  font-family: var(--font-title);
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+}
+.modal-image {
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto 1.5rem auto;
+  border-radius: 10px;
+}
+.modal-text {
+  font-family: var(--font-text);
+  margin-bottom: 2rem;
+  font-weight: 700;
+}
+.modal-action-btn {
+  display: inline-block;
+  background-color: var(--color-dark);
+  color: var(--color-light);
+  padding: 1.2rem 2.8rem;
+  font-family: var(--font-title);
+  text-decoration: none;
+  border-radius: 5px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.modal-action-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+}
+.quote-container {
+  margin-top: 1.5rem;
+  padding: 1rem 1.5rem;
+  border-left: 4px solid var(--color-shadow);
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 0 5px 5px 0;
+  text-align: left;
+}
+.quote-text {
+  color: var(--color-dark);
+  font-size: 1.8rem;
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+.quote-author {
+  color: var(--color-dark);
+  font-size: 1.6rem;
+  font-weight: 700;
+  font-family: var(--font-text);
+  display: block;
+  text-align: right;
+}
+
+/* ============================================= */
+/*      REGLAS RESPONSIVE Y DE PERFORMANCE       */
+/* ============================================= */
+
+/* FIX CRÍTICO: Media query para pantallas MUY estrechas como Galaxy S8 */
+@media (max-width: 380px) {
+  .hero-nav ul {
+    flex-direction: column;
+    /* CAMBIO: Se aumenta el espacio entre los botones apilados */
+    gap: 1.5rem;
+  }
+  .hero-header {
+    position: relative;
+    padding: 2rem 0 0 0;
+    /* CAMBIO: Se añade un margen inferior para separar la navegación del contenido */
+    margin-bottom: 3rem;
+  }
+  #hero {
+    /* CAMBIO: Se ajusta el padding para dar espacio al nuevo layout del header */
+    padding-top: 0;
+    justify-content: flex-start; /* Alinea el contenido desde arriba */
+  }
+  .hero-ribbon {
+    /* Se posiciona de forma segura dentro del nuevo layout */
+    top: 15px;
+    right: 20px;
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-header {
+    position: absolute;
+    padding: 2.5rem 0;
+  }
+  .hero-nav {
+    max-width: none;
+  }
+  .hero-nav ul {
+    gap: 2.5rem;
+  }
+  .hero-nav a {
+    font-size: 2rem;
+  }
+  .hero-main {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    align-items: center;
+    gap: 4rem;
+    text-align: left;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .profile-image-container {
+    max-width: 200px;
+    margin: 0;
+  }
+  .hero-title,
+  .hero-subtitle {
+    text-shadow: 4px 4px 0px var(--color-shadow);
+  }
+}
+
+@media (max-width: 767px) {
+  #hero {
+    background-attachment: scroll;
+  }
+}
+
+@media (max-width: 900px) and (orientation: landscape) {
+  #hero {
+    padding-top: 6rem;
+    padding-bottom: 2rem;
+  }
+  .hero-main {
+    margin-bottom: 2rem;
+  }
+}
