@@ -10,11 +10,23 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ========================================================
-  // 2. LÓGICA DE VENTANAS MODALES (Reescritura final y directa)
+  // 2. LÓGICA DE VENTANAS MODALES (CON ANIMACIÓN DE CIERRE)
   // ========================================================
   const openButtons = document.querySelectorAll("[data-modal-target]");
   const closeButtons = document.querySelectorAll("[data-close-modal]");
   const overlays = document.querySelectorAll(".modal-overlay");
+
+  // Función para cerrar un modal
+  const closeModal = (modal) => {
+    if (!modal) return;
+    modal.classList.add("is-closing"); // Añade clase para la animación de salida
+    // Espera a que termine la animación antes de ocultarlo por completo
+    setTimeout(() => {
+      modal.classList.remove("is-visible");
+      modal.classList.remove("is-closing");
+      document.body.style.overflow = "auto";
+    }, 350); // Debe coincidir con la duración de la transición en CSS
+  };
 
   // ASIGNAR LISTENERS PARA ABRIR
   openButtons.forEach((button) => {
@@ -62,10 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
   closeButtons.forEach((button) => {
     button.addEventListener("click", () => {
       const modal = button.closest(".modal-overlay");
-      if (modal) {
-        modal.classList.remove("is-visible");
-        document.body.style.overflow = "auto";
-      }
+      closeModal(modal);
     });
   });
 
@@ -73,8 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
   overlays.forEach((overlay) => {
     overlay.addEventListener("click", (event) => {
       if (event.target === overlay) {
-        overlay.classList.remove("is-visible");
-        document.body.style.overflow = "auto";
+        closeModal(overlay);
       }
     });
   });

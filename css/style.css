@@ -29,44 +29,34 @@ body {
   color: var(--color-light);
   overflow-x: hidden;
 }
-.container {
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto;
-}
 
 /* ============================================= */
-/*                 ESTILOS DEL HERO              */
+/*    ESTILOS DEL HERO (ENFOQUE MOBILE-FIRST)    */
 /* ============================================= */
 #hero {
-  min-height: 100vh;
+  min-height: 100dvh;
   width: 100%;
   background: url("../assets/images/background-wall.png") no-repeat center
     center;
   background-size: cover;
-  background-attachment: fixed;
-  padding: 8rem 2rem 4rem 2rem;
+  background-attachment: scroll;
+  padding: 3rem 0;
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 5rem;
 }
+
+/* --- Cabecera y Navegación --- */
+/* SOLUCIÓN FINAL: Se usa padding para crear una "zona segura" que impide la colisión. */
 .hero-header {
-  position: absolute;
-  top: 0;
-  left: 0; /* Abarca todo el ancho para un mejor control */
   width: 100%;
-  padding: 1.5rem 0; /* Reducido para móviles */
   z-index: 5;
+  padding: 0 7rem 0 2rem; /* 70px a la derecha para proteger la cinta, 20px a la izquierda por simetría */
 }
-/* FIX CRÍTICO: Se establece un "contenedor seguro" para la navegación */
-.hero-nav {
-  /* La navegación solo puede ocupar el 75% del ancho, dejando espacio para la cinta */
-  max-width: 75%;
-  margin-left: auto;
-  margin-right: auto;
-}
+/* Se elimina el max-width, ya que el padding del padre ahora controla el espacio. */
 .hero-nav ul {
   list-style: none;
   display: flex;
@@ -79,8 +69,8 @@ body {
   font-family: var(--font-title);
   color: var(--color-dark);
   text-decoration: none;
-  font-size: 1.6rem; /* Ligeramente más pequeño en base móvil */
-  text-shadow: 1px 1px 0px var(--color-shadow);
+  font-size: 1.6rem;
+  text-shadow: 1px 1px 0 var(--color-shadow);
   transition: transform 0.3s ease, text-shadow 0.3s ease;
   display: flex;
   align-items: center;
@@ -88,87 +78,10 @@ body {
 }
 .hero-nav a:hover {
   transform: scale(1.1);
-  text-shadow: 2px 2px 0px var(--color-shadow),
-    -2px -2px 0px rgba(248, 235, 228, 0.5);
+  text-shadow: 2px 2px 0 var(--color-shadow),
+    -2px -2px 0 rgba(248, 235, 228, 0.5);
   cursor: pointer;
 }
-.hero-content {
-  text-align: center;
-  width: 100%;
-}
-.hero-main {
-  margin-bottom: 4rem;
-}
-
-/* MEJORA: Animación añadida al perfil */
-.profile-image-container {
-  max-width: 180px;
-  margin: 0 auto 2rem auto;
-  border: 5px solid var(--color-dark);
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 10px 10px 0 var(--color-shadow);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.profile-image-container:hover {
-  cursor: pointer;
-  animation: button-press 0.4s ease;
-}
-.profile-image-container img {
-  width: 100%;
-  display: block;
-}
-
-/* FIX CRÍTICO: clamp() re-calibrado para mejor fluidez */
-.hero-title,
-.hero-subtitle {
-  font-family: var(--font-title);
-  color: var(--color-dark);
-  line-height: 1.1;
-  text-shadow: 3px 3px 0px var(--color-shadow); /* Reducida para móviles */
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-.hero-title {
-  /* Valor base más pequeño y escalado vw más suave */
-  font-size: clamp(3rem, 10vw, 8rem);
-}
-.hero-subtitle {
-  /* Valor base más pequeño y escalado vw más suave */
-  font-size: clamp(2.2rem, 8vw, 6rem);
-  margin-top: -0.5rem;
-}
-.char {
-  display: inline-block;
-  transition: transform 0.2s ease;
-}
-.char:hover {
-  cursor: pointer;
-  animation: button-press 0.4s ease;
-}
-
-.hero-description {
-  background-color: transparent;
-  border: 5px solid var(--color-dark);
-  border-radius: 15px;
-  padding: 2rem;
-  max-width: 600px;
-  margin: 0 auto;
-  box-shadow: 10px 10px 0 var(--color-shadow);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.hero-description p {
-  color: var(--color-dark);
-  font-weight: bold;
-  font-size: 1.8rem;
-  line-height: 1.5;
-}
-.hero-description:hover {
-  cursor: pointer;
-  animation: button-press 0.4s ease;
-}
-
 .hero-ribbon {
   position: absolute;
   top: 0;
@@ -197,7 +110,89 @@ body {
   transform: translateY(5px);
 }
 
-/* (El CSS de los modales es robusto y no necesita cambios) */
+/* --- Contenido Principal (Perfil, Títulos, Descripción) --- */
+.hero-content {
+  text-align: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rem;
+  padding: 0 2rem;
+}
+.hero-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.profile-image-container {
+  max-width: 180px;
+  border: 5px solid var(--color-dark);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 10px 10px 0 var(--color-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.profile-image-container:hover {
+  cursor: pointer;
+  animation: button-press 0.4s ease;
+}
+.profile-image-container img {
+  width: 100%;
+  display: block;
+}
+.hero-main > .hero-text {
+  margin-top: 2rem;
+}
+.hero-title,
+.hero-subtitle {
+  font-family: var(--font-title);
+  color: var(--color-dark);
+  line-height: 1.1;
+  text-shadow: 3px 3px 0 var(--color-shadow);
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.hero-title {
+  font-size: clamp(3.5rem, 9vw, 8rem);
+}
+.hero-subtitle {
+  font-size: clamp(2.4rem, 7vw, 6rem);
+  margin-top: -0.5rem;
+}
+.char {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+.char:hover {
+  cursor: pointer;
+  animation: button-press 0.4s ease;
+}
+.hero-description {
+  background-color: transparent;
+  border: 5px solid var(--color-dark);
+  border-radius: 15px;
+  padding: 2rem;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 10px 10px 0 var(--color-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.hero-description p {
+  color: var(--color-dark);
+  font-weight: bold;
+  font-size: 1.8rem;
+  line-height: 1.5;
+}
+.hero-description:hover {
+  cursor: pointer;
+  animation: button-press 0.4s ease;
+}
+
+/* ============================================= */
+/*        ESTILOS DE MODALES (CON ANIMACIÓN)     */
+/* ============================================= */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -205,22 +200,42 @@ body {
   width: 100%;
   height: 100%;
   z-index: 1100;
-  display: none;
+  display: flex; /* Cambiamos a flex por defecto para que la transición de visibilidad funcione */
   justify-content: center;
   align-items: center;
   padding: 2rem;
+
+  /* ESTADO INICIAL: Invisible y sin puntero */
   opacity: 0;
-  transition: opacity 0.35s ease;
-  background-color: rgba(0, 0, 0, 0);
+  pointer-events: none;
+
+  /* COREOGRAFÍA - PASO 1: Transición del fondo y el efecto blur */
+  background-color: rgba(
+    33,
+    11,
+    1,
+    0.3
+  ); /* Un color de fondo sutil para el overlay */
+  -webkit-backdrop-filter: blur(0px); /* El blur inicia en 0 */
+  backdrop-filter: blur(0px);
+  transition: opacity 0.3s ease-out, backdrop-filter 0.3s ease-out;
 }
 .modal-overlay.is-visible {
-  display: flex;
+  /* ESTADO ACTIVO: Visible y con puntero */
   opacity: 1;
+  pointer-events: auto;
+
+  /* Se activa el efecto blur al volverse visible */
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
 }
 .modal-content {
-  background-color: rgba(248, 235, 228, 0.51);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+  background-color: rgba(
+    248,
+    235,
+    228,
+    0.85
+  ); /* Ligeramente más opaco para legibilidad */
   border: 3px solid var(--color-dark);
   border-radius: 15px;
   padding: 3rem;
@@ -230,7 +245,29 @@ body {
   color: var(--color-dark);
   text-align: center;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+
+  /* ESTADO INICIAL: Invisible y listo para animar */
+  opacity: 0;
 }
+
+/* COREOGRAFÍA - PASO 2: La animación del contenido se activa con un retraso */
+.modal-overlay.is-visible .modal-content {
+  animation: fade-in-up 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation-delay: 0.1s; /* Retraso clave para esperar el blur */
+}
+
+/* ANIMACIÓN DE CIERRE: Se activa con una nueva clase desde JS */
+.modal-overlay.is-closing {
+  opacity: 0;
+  -webkit-backdrop-filter: blur(0px);
+  backdrop-filter: blur(0px);
+}
+.modal-overlay.is-closing .modal-content {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+}
+
 .modal-close-btn {
   position: absolute;
   top: 10px;
@@ -303,41 +340,23 @@ body {
 }
 
 /* ============================================= */
-/*      REGLAS RESPONSIVE Y DE PERFORMANCE       */
+/*  SOLUCIÓN ARQUITECTÓNICA PARA ESCRITORIO      */
 /* ============================================= */
-
-/* FIX CRÍTICO: Media query para pantallas MUY estrechas como Galaxy S8 */
-@media (max-width: 380px) {
-  .hero-nav ul {
-    flex-direction: column;
-    /* CAMBIO: Se aumenta el espacio entre los botones apilados */
-    gap: 1.5rem;
-  }
-  .hero-header {
-    position: relative;
-    padding: 2rem 0 0 0;
-    /* CAMBIO: Se añade un margen inferior para separar la navegación del contenido */
-    margin-bottom: 3rem;
-  }
-  #hero {
-    /* CAMBIO: Se ajusta el padding para dar espacio al nuevo layout del header */
-    padding-top: 0;
-    justify-content: flex-start; /* Alinea el contenido desde arriba */
-  }
-  .hero-ribbon {
-    /* Se posiciona de forma segura dentro del nuevo layout */
-    top: 15px;
-    right: 20px;
-  }
-}
-
 @media (min-width: 768px) {
+  #hero {
+    background-attachment: fixed;
+    gap: 0;
+  }
   .hero-header {
     position: absolute;
-    padding: 2.5rem 0;
+    top: 0;
+    left: 0;
+    padding: 2.5rem 0; /* Se resetea el padding para la vista de escritorio */
   }
   .hero-nav {
-    max-width: none;
+    max-width: 900px;
+    width: 90%;
+    margin: 0 auto;
   }
   .hero-nav ul {
     gap: 2.5rem;
@@ -345,38 +364,45 @@ body {
   .hero-nav a {
     font-size: 2rem;
   }
+  .hero-content {
+    gap: 4rem;
+    padding: 0 2rem;
+  }
   .hero-main {
     display: grid;
+    flex-direction: row;
     grid-template-columns: 200px 1fr;
     align-items: center;
     gap: 4rem;
     text-align: left;
     max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
+    width: 100%;
   }
   .profile-image-container {
     max-width: 200px;
-    margin: 0;
+  }
+  .hero-main > .hero-text {
+    margin-top: 0;
   }
   .hero-title,
   .hero-subtitle {
-    text-shadow: 4px 4px 0px var(--color-shadow);
+    justify-content: flex-start;
+    text-shadow: 4px 4px 0 var(--color-shadow);
   }
 }
 
-@media (max-width: 767px) {
+/* --- Optimización para pantallas horizontales pequeñas --- */
+@media (max-height: 450px) and (orientation: landscape) {
   #hero {
-    background-attachment: scroll;
+    padding-top: 3rem;
   }
-}
-
-@media (max-width: 900px) and (orientation: landscape) {
-  #hero {
-    padding-top: 6rem;
-    padding-bottom: 2rem;
+  .hero-header {
+    position: static;
   }
-  .hero-main {
-    margin-bottom: 2rem;
+  .profile-image-container {
+    max-width: 140px;
+  }
+  .hero-main > .hero-text {
+    margin-top: 1rem;
   }
 }
