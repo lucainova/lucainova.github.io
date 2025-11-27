@@ -1,15 +1,41 @@
-@import "animations.css";
-
-/* ============================================= */
-/*       VARIABLES GLOBALES Y SETUP BASE         */
-/* ============================================= */
+/* =========================================
+   1. VARIABLES & SISTEMA DE DISEÑO
+   ========================================= */
 :root {
-  --color-dark: #210b01;
-  --color-shadow: #cc7048;
-  --color-light: #f8ebe4;
-  --font-title: "Bungee", sans-serif;
-  --font-text: "Tomorrow", sans-serif;
+  /* -- PALETA 'NOIR ACADÉMICO' -- */
+  --color-bg-primary: #160701;
+  --color-bg-mobile-menu: #0d0400;
+  /* Aún más oscuro para contraste móvil */
+  --color-bg-overlay: rgba(22, 7, 1, 0.7);
+
+  --color-accent-gold: #cca348;
+  --color-text-body: #ebd6a5;
+
+  /* Fuentes */
+  --font-heading: "Hertical Serif Rough", serif;
+  --font-body: "Sigher", serif;
+
+  /* Espaciados y Layout */
+  --spacing-sm: 1.6rem;
+  --spacing-md: 3.2rem;
+  --container-width: 1200px;
 }
+
+/* =========================================
+   2. TYPOGRAPHY & RESET
+   ========================================= */
+@font-face {
+  font-family: "Hertical Serif Rough";
+  src: url("../assets/fonts/HerticalSerifRough.otf") format("opentype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Sigher";
+  src: url("../assets/fonts/SigherRegular.ttf") format("truetype");
+  font-display: swap;
+}
+
 *,
 *::before,
 *::after {
@@ -17,392 +43,366 @@
   margin: 0;
   padding: 0;
 }
+
 html {
   font-size: 62.5%;
   scroll-behavior: smooth;
 }
+
+/* 1rem = 10px */
+
 body {
-  font-family: var(--font-text);
-  font-size: 1.6rem;
+  font-family: var(--font-body);
+  font-size: 1.8rem;
   line-height: 1.6;
-  background-color: var(--color-dark);
-  color: var(--color-light);
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-body);
   overflow-x: hidden;
 }
 
-/* ============================================= */
-/*    ESTILOS DEL HERO (ENFOQUE MOBILE-FIRST)    */
-/* ============================================= */
-#hero {
-  min-height: 100dvh;
-  width: 100%;
-  background: url("../assets/images/background-wall.png") no-repeat center
-    center;
-  background-size: cover;
-  background-attachment: scroll;
-  padding: 3rem 0;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 5rem;
+img {
+  max-width: 100%;
+  display: block;
+  height: auto;
 }
 
-/* --- Cabecera y Navegación --- */
-/* SOLUCIÓN FINAL: Se usa padding para crear una "zona segura" que impide la colisión. */
-.hero-header {
-  width: 100%;
-  z-index: 5;
-  padding: 0 7rem 0 2rem; /* 70px a la derecha para proteger la cinta, 20px a la izquierda por simetría */
-}
-/* Se elimina el max-width, ya que el padding del padre ahora controla el espacio. */
-.hero-nav ul {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-}
-.hero-nav a {
-  font-family: var(--font-title);
-  color: var(--color-dark);
+a {
   text-decoration: none;
-  font-size: 1.6rem;
-  text-shadow: 1px 1px 0 var(--color-shadow);
-  transition: transform 0.3s ease, text-shadow 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
+  color: inherit;
+  transition: all 0.3s;
 }
-.hero-nav a:hover {
-  transform: scale(1.1);
-  text-shadow: 2px 2px 0 var(--color-shadow),
-    -2px -2px 0 rgba(248, 235, 228, 0.5);
-  cursor: pointer;
+
+/* Utilitarios */
+.container {
+  width: 100%;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-sm);
 }
-.hero-ribbon {
-  position: absolute;
+
+/* =========================================
+   3. HEADER DINÁMICO (Jerarquía Aumentada)
+   ========================================= */
+.site-header {
+  position: fixed;
   top: 0;
-  right: 20px;
-  height: 110px;
-  width: 50px;
-  background-color: var(--color-dark);
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-  z-index: 10;
-  box-shadow: 0 -50px 0 var(--color-dark);
-}
-.hero-ribbon::after {
-  content: "";
-  position: absolute;
-  bottom: -19px;
   left: 0;
   width: 100%;
-  height: 20px;
-  background: var(--color-dark);
-  clip-path: polygon(0 0, 100% 0, 50% 100%);
-}
-.hero-ribbon:hover {
-  transform: translateY(5px);
+  z-index: 1000;
+  padding: 3rem 0;
+  /* Espaciado inicial generoso */
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 100%);
 }
 
-/* --- Contenido Principal (Perfil, Títulos, Descripción) --- */
-.hero-content {
-  text-align: center;
-  width: 100%;
+/* ESTADO SCROLLED (Más compacto y legible) */
+.site-header.scrolled {
+  padding: 1.2rem 0;
+  background-color: rgba(15, 5, 1, 0.98);
+  /* Casi sólido */
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.8);
+}
+
+.nav-flex {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
+}
+
+/* --- LOGO: La Autoridad --- */
+.logo {
+  font-family: var(--font-heading);
+  color: var(--color-accent-gold);
+  /* MANTENEMOS GIGANTE: De 3rem a 5.5rem según pantalla */
+  font-size: clamp(3.2rem, 6vw, 5.5rem);
+  letter-spacing: 2px;
+  line-height: 1;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+  transform-origin: left center;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.site-header.scrolled .logo {
+  transform: scale(0.65);
+}
+
+/* --- ENLACES NAVEGACIÓN (Escritorio) --- */
+.nav-links {
+  display: flex;
   gap: 4rem;
-  padding: 0 2rem;
-}
-.hero-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.profile-image-container {
-  max-width: 180px;
-  border: 5px solid var(--color-dark);
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 10px 10px 0 var(--color-shadow);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.profile-image-container:hover {
-  cursor: pointer;
-  animation: button-press 0.4s ease;
-}
-.profile-image-container img {
-  width: 100%;
-  display: block;
-}
-.hero-main > .hero-text {
-  margin-top: 2rem;
-}
-.hero-title,
-.hero-subtitle {
-  font-family: var(--font-title);
-  color: var(--color-dark);
-  line-height: 1.1;
-  text-shadow: 3px 3px 0 var(--color-shadow);
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-.hero-title {
-  font-size: clamp(3.5rem, 9vw, 8rem);
-}
-.hero-subtitle {
-  font-size: clamp(2.4rem, 7vw, 6rem);
-  margin-top: -0.5rem;
-}
-.char {
-  display: inline-block;
-  transition: transform 0.2s ease;
-}
-.char:hover {
-  cursor: pointer;
-  animation: button-press 0.4s ease;
-}
-.hero-description {
-  background-color: transparent;
-  border: 5px solid var(--color-dark);
-  border-radius: 15px;
-  padding: 2rem;
-  max-width: 600px;
-  width: 100%;
-  box-shadow: 10px 10px 0 var(--color-shadow);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.hero-description p {
-  color: var(--color-dark);
-  font-weight: bold;
-  font-size: 1.8rem;
-  line-height: 1.5;
-}
-.hero-description:hover {
-  cursor: pointer;
-  animation: button-press 0.4s ease;
+  /* Más separación entre links */
 }
 
-/* ============================================= */
-/*        ESTILOS DE MODALES (CON ANIMACIÓN)     */
-/* ============================================= */
-.modal-overlay {
+.nav-links a {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  /* Aumentado para legibilidad */
+  letter-spacing: 2px;
+  color: var(--color-text-body);
+  text-transform: uppercase;
+  position: relative;
+  /* Necesario para la línea animada */
+  padding-bottom: 5px;
+}
+
+.nav-links a:hover {
+  color: var(--color-accent-gold);
+}
+
+/* --- [RESTAURADO] ANIMACIÓN DE SUBRAYADO LENTO --- */
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  /* Comienza invisible */
+  height: 2px;
+  background-color: var(--color-accent-gold);
+  /* Transición lenta de 0.4s como pediste */
+  transition: width 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+  box-shadow: 0 0 10px rgba(204, 163, 72, 0.6);
+  /* Brillo a la línea */
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+  /* Se llena al 100% */
+}
+
+/* --- MENU MÓVIL (Revisión de Tamaños) --- */
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 101;
+  padding: 1rem;
+}
+
+.mobile-menu-btn .bar {
+  display: block;
+  width: 32px;
+  /* Más larga */
+  height: 3px;
+  margin: 7px auto;
+  /* Más separadas */
+  background-color: var(--color-accent-gold);
+  transition: 0.3s;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-btn {
+    display: block;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 85%;
+    max-width: 340px;
+    height: 100vh;
+    background-color: var(--color-bg-mobile-menu);
+    border-left: 2px solid rgba(204, 163, 72, 0.1);
+    /* Borde sutil a la izq */
+
+    flex-direction: column;
+    justify-content: center;
+    /* Centrado vertical */
+    align-items: center;
+    /* Centrado horizontal */
+
+    gap: 5rem;
+    /* MUCHO espacio entre enlaces */
+    z-index: 99;
+    transition: right 0.4s cubic-bezier(0.7, 0, 0.2, 1);
+    box-shadow: -10px 0 50px rgba(0, 0, 0, 0.9);
+  }
+
+  .nav-links.active {
+    right: 0;
+  }
+
+  /* --- [ANABÓLICOS MÓVILES] --- */
+  /* Hacemos los links gigantes para el móvil */
+  .nav-links a {
+    font-size: 2.4rem;
+    /* ENORME para lectura fácil */
+    font-weight: bold;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Ajuste visual del logo en scroll móvil */
+  .site-header.scrolled .logo {
+    transform: scale(0.7);
+  }
+}
+
+/* Overlay Menu */
+.mobile-nav-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1100;
-  display: flex; /* Cambiamos a flex por defecto para que la transición de visibilidad funcione */
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
-
-  /* ESTADO INICIAL: Invisible y sin puntero */
+  background: rgba(0, 0, 0, 0.9);
+  /* Más oscuro */
+  z-index: 98;
   opacity: 0;
   pointer-events: none;
-
-  /* COREOGRAFÍA - PASO 1: Transición del fondo y el efecto blur */
-  background-color: rgba(
-    33,
-    11,
-    1,
-    0.3
-  ); /* Un color de fondo sutil para el overlay */
-  -webkit-backdrop-filter: blur(0px); /* El blur inicia en 0 */
-  backdrop-filter: blur(0px);
-  transition: opacity 0.3s ease-out, backdrop-filter 0.3s ease-out;
+  transition: 0.3s;
+  backdrop-filter: blur(5px);
 }
-.modal-overlay.is-visible {
-  /* ESTADO ACTIVO: Visible y con puntero */
+
+.mobile-nav-overlay.active {
   opacity: 1;
   pointer-events: auto;
-
-  /* Se activa el efecto blur al volverse visible */
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
 }
-.modal-content {
-  background-color: rgba(
-    248,
-    235,
-    228,
-    0.85
-  ); /* Ligeramente más opaco para legibilidad */
-  border: 3px solid var(--color-dark);
-  border-radius: 15px;
-  padding: 3rem;
-  max-width: 500px;
-  width: 100%;
+
+/* Animación Hamburguesa -> X */
+.mobile-menu-btn.active .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-btn.active .bar:nth-child(1) {
+  transform: translateY(10px) rotate(45deg);
+}
+
+.mobile-menu-btn.active .bar:nth-child(3) {
+  transform: translateY(-10px) rotate(-45deg);
+}
+
+
+/* =========================================
+   4. HERO SECTION (Impacto & Contrastes)
+   ========================================= */
+.hero {
   position: relative;
-  color: var(--color-dark);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-
-  /* ESTADO INICIAL: Invisible y listo para animar */
-  opacity: 0;
+  overflow: hidden;
 }
 
-/* COREOGRAFÍA - PASO 2: La animación del contenido se activa con un retraso */
-.modal-overlay.is-visible .modal-content {
-  animation: fade-in-up 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-  animation-delay: 0.1s; /* Retraso clave para esperar el blur */
-}
-
-/* ANIMACIÓN DE CIERRE: Se activa con una nueva clase desde JS */
-.modal-overlay.is-closing {
-  opacity: 0;
-  -webkit-backdrop-filter: blur(0px);
-  backdrop-filter: blur(0px);
-}
-.modal-overlay.is-closing .modal-content {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.2s ease-out, transform 0.2s ease-out;
-}
-
-.modal-close-btn {
+.hero-bg-wrapper {
   position: absolute;
-  top: 10px;
-  right: 15px;
-  background: 0 0;
-  border: none;
-  font-size: 3rem;
-  font-weight: 700;
-  color: var(--color-dark);
-  cursor: pointer;
-  line-height: 1;
-  transition: transform 0.3s ease, color 0.3s ease;
-}
-.modal-close-btn:hover {
-  transform: rotate(90deg);
-  color: var(--color-shadow);
-}
-.modal-title {
-  font-family: var(--font-title);
-  font-size: 3rem;
-  margin-bottom: 1.5rem;
-  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
-}
-.modal-image {
+  top: 0;
+  left: 0;
   width: 100%;
-  max-width: 200px;
-  margin: 0 auto 1.5rem auto;
-  border-radius: 10px;
+  height: 100%;
+  z-index: -2;
 }
-.modal-text {
-  font-family: var(--font-text);
+
+.hero-bg-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Degradado estilo Viñeta Cinematográfica */
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: radial-gradient(circle at center, rgba(22, 7, 1, 0.4) 10%, rgba(22, 7, 1, 0.95) 90%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 950px;
+  padding: 12rem 2rem 4rem;
+  /* Más aire arriba para el header */
+}
+
+/* Subtítulo */
+.hero-subtitle {
+  font-family: var(--font-heading);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  /* Aumentado */
+  color: var(--color-accent-gold);
+  letter-spacing: 0.5rem;
+  /* Muy espaciado */
+  text-transform: uppercase;
   margin-bottom: 2rem;
-  font-weight: 700;
-}
-.modal-action-btn {
-  display: inline-block;
-  background-color: var(--color-dark);
-  color: var(--color-light);
-  padding: 1.2rem 2.8rem;
-  font-family: var(--font-title);
-  text-decoration: none;
-  border-radius: 5px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.modal-action-btn:hover {
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
-}
-.quote-container {
-  margin-top: 1.5rem;
-  padding: 1rem 1.5rem;
-  border-left: 4px solid var(--color-shadow);
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 0 5px 5px 0;
-  text-align: left;
-}
-.quote-text {
-  color: var(--color-dark);
-  font-size: 1.8rem;
-  font-style: italic;
-  margin-bottom: 1rem;
-}
-.quote-author {
-  color: var(--color-dark);
-  font-size: 1.6rem;
-  font-weight: 700;
-  font-family: var(--font-text);
   display: block;
-  text-align: right;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
 }
 
-/* ============================================= */
-/*  SOLUCIÓN ARQUITECTÓNICA PARA ESCRITORIO      */
-/* ============================================= */
-@media (min-width: 768px) {
-  #hero {
-    background-attachment: fixed;
-    gap: 0;
+/* Título */
+.hero-title {
+  font-family: var(--font-heading);
+  /* AUMENTADO AÚN MÁS para presencia */
+  font-size: clamp(4.2rem, 9.5vw, 10rem);
+  line-height: 1.05;
+  color: var(--color-text-body);
+  margin-bottom: 5rem;
+  text-transform: uppercase;
+  text-shadow: 0 5px 20px rgba(0, 0, 0, 0.9);
+}
+
+/* Botones: Ajuste de escala */
+.hero-buttons {
+  display: flex;
+  gap: 2.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-block;
+  padding: 1.8rem 3.6rem;
+  /* MÁS grande */
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  /* LETRA GRANDE */
+  letter-spacing: 2px;
+  border: 2px solid var(--color-accent-gold);
+  color: var(--color-accent-gold);
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Más contraste para leer */
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn--primary {
+  background-color: var(--color-accent-gold);
+  color: var(--color-bg-primary);
+  box-shadow: 0 0 15px rgba(204, 163, 72, 0.3);
+}
+
+.btn--primary:hover {
+  background-color: transparent;
+  color: var(--color-accent-gold);
+  box-shadow: 0 0 30px rgba(204, 163, 72, 0.6);
+  transform: translateY(-4px);
+}
+
+.btn--secondary:hover {
+  background-color: rgba(204, 163, 72, 0.2);
+  color: #fff;
+  border-color: #fff;
+  transform: translateY(-4px);
+}
+
+@media (max-width: 480px) {
+  .hero-buttons {
+    gap: 1.5rem;
   }
-  .hero-header {
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 2.5rem 0; /* Se resetea el padding para la vista de escritorio */
-  }
-  .hero-nav {
-    max-width: 900px;
-    width: 90%;
-    margin: 0 auto;
-  }
-  .hero-nav ul {
-    gap: 2.5rem;
-  }
-  .hero-nav a {
-    font-size: 2rem;
-  }
-  .hero-content {
-    gap: 4rem;
-    padding: 0 2rem;
-  }
-  .hero-main {
-    display: grid;
-    flex-direction: row;
-    grid-template-columns: 200px 1fr;
-    align-items: center;
-    gap: 4rem;
-    text-align: left;
-    max-width: 900px;
+
+  .btn {
     width: 100%;
-  }
-  .profile-image-container {
-    max-width: 200px;
-  }
-  .hero-main > .hero-text {
-    margin-top: 0;
-  }
-  .hero-title,
-  .hero-subtitle {
-    justify-content: flex-start;
-    text-shadow: 4px 4px 0 var(--color-shadow);
-  }
-}
-
-/* --- Optimización para pantallas horizontales pequeñas --- */
-@media (max-height: 450px) and (orientation: landscape) {
-  #hero {
-    padding-top: 3rem;
-  }
-  .hero-header {
-    position: static;
-  }
-  .profile-image-container {
-    max-width: 140px;
-  }
-  .hero-main > .hero-text {
-    margin-top: 1rem;
+    text-align: center;
+    font-size: 1.6rem;
+    /* En móvil un poco menos, pero legible */
   }
 }

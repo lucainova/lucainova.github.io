@@ -1,34 +1,5 @@
-/* ============================================= */
-/*       ANIMACIONES REUTILIZABLES DEL SITIO     */
-/* ============================================= */
-
-/*
-  Definición: button-press
-  Propósito:  Simula una micro-interacción de presión y liberación.
-  Uso:        Ideal para estados :hover o :active en elementos interactivos
-              como botones, tarjetas o caracteres de texto.
-  Optimización: Anima únicamente la propiedad 'transform', lo cual es altamente
-                eficiente y evita re-cálculos de layout por parte del navegador.
-*/
-@keyframes button-press {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(8px); /* Ajuste sutil para simular la presión */
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-
-/*
-  Definición: fade-in-up
-  Propósito:  Anima la entrada de un elemento desde abajo y con un desvanecimiento.
-  Uso:        Perfecto para la aparición de ventanas modales o contenido dinámico.
-  Optimización: Anima 'opacity' y 'transform', propiedades eficientes.
-*/
-@keyframes fade-in-up {
+/* Fade Up: El elemento aparece subiendo suavemente */
+@keyframes fadeInUp {
   from {
     opacity: 0;
     transform: translateY(20px);
@@ -37,4 +8,20 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.animate-fade-up {
+  animation: fadeInUp 1s cubic-bezier(0.22, 1, 0.36, 1) forwards; /* Curva 'ease-out-quint' suave */
+  opacity: 0; /* Oculto inicialmente hasta que inicie */
+}
+
+/* Retrasos para coreografía en cascada */
+.delay-1 {
+  animation-delay: 0.2s;
+}
+.delay-2 {
+  animation-delay: 0.4s;
+}
+.delay-3 {
+  animation-delay: 0.6s;
 }

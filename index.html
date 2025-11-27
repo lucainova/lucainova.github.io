@@ -1,184 +1,99 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Luca Inova - Escritor</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Bungee&family=Tomorrow:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Luca Inova - Escritor de realismo inquietante. Una ucronía personal donde convivo con mis propias ficciones. Córdoba, Argentina." />
+  <title>Luca Inova | Narrativa Oscura</title>
 
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-  </head>
-  <body>
-    <main>
-      <section id="hero">
-        <header class="hero-header container">
-          <nav class="hero-nav">
-            <ul>
-              <li>
-                <a href="#" data-modal-target="#modal-blog"
-                  >INOVA BLOG <i class="fas fa-chevron-right"></i
-                ></a>
-              </li>
-              <li>
-                <a href="#" data-modal-target="#modal-patreon"
-                  >PATREON <i class="fas fa-chevron-right"></i
-                ></a>
-              </li>
-              <li>
-                <a href="#" data-modal-target="#modal-newsletter"
-                  >NEWSLETTER <i class="fas fa-chevron-right"></i
-                ></a>
-              </li>
-            </ul>
-          </nav>
-        </header>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/animations.css" />
 
-        <a
-          href="#"
-          class="hero-ribbon"
-          data-modal-target="#modal-easteregg"
-          aria-label="Abrir secreto"
-        ></a>
+  <!-- Estilos Críticos de Carga -->
+  <style>
+    .hero {
+      min-height: 100vh;
+      opacity: 0;
+      animation: fadeInPage 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    }
 
-        <div class="hero-content container">
-          <div class="hero-main">
-            <div
-              class="profile-image-container"
-              data-aos="fade-right"
-              data-aos-duration="1000"
-            >
-              <img
-                src="assets/images/luca-inova-profile.jpg"
-                alt="Foto de perfil de Luca Inova"
-              />
-            </div>
+    @keyframes fadeInPage {
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
 
-            <div
-              class="hero-text"
-              data-aos="fade-up"
-              data-aos-delay="200"
-              data-aos-duration="1000"
-            >
-              <h1 class="hero-title" aria-label="Luca Inova">
-                <span class="char">L</span><span class="char">U</span
-                ><span class="char">C</span><span class="char">A</span
-                ><span class="char">&nbsp;</span><span class="char">I</span
-                ><span class="char">N</span><span class="char">O</span
-                ><span class="char">V</span><span class="char">A</span>
-              </h1>
-              <h2 class="hero-subtitle" aria-label="Escritor">
-                <span class="char">E</span><span class="char">S</span
-                ><span class="char">C</span><span class="char">R</span
-                ><span class="char">I</span><span class="char">T</span
-                ><span class="char">O</span><span class="char">R</span>
-              </h2>
-            </div>
-          </div>
-          <div
-            class="hero-description"
-            data-aos="fade-up"
-            data-aos-delay="400"
-            data-aos-duration="1000"
-          >
-            <p>
-              Hola, mi nombre es Luca Inova. Soy escritor y desarrollé esta
-              página para visibilizar mi trabajo y hacer llegar a más personas
-              mis libros.
-            </p>
-          </div>
+<body>
+  <!-- 1. HEADER (Navigation) -->
+  <header class="site-header">
+    <div class="container nav-flex">
+
+      <!-- Marca Personal (Ancla Visual) -->
+      <a href="#" class="logo">LUCA INOVA</a>
+
+      <!-- Botón Móvil (Hamburguesa) -->
+      <button class="mobile-menu-btn" aria-label="Alternar menú de navegación">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+
+      <!-- Enlaces de Navegación -->
+      <nav class="nav-links">
+        <a href="#vitrina">Relatos</a>
+        <a href="#pulso">Visual</a>
+        <a href="#sobre-mi">Sobre mí</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+
+      <!-- Overlay Oscuro para móvil -->
+      <div class="mobile-nav-overlay"></div>
+    </div>
+  </header>
+
+  <!-- 2. CONTENIDO PRINCIPAL -->
+  <main>
+    <!-- SECCIÓN HERO -->
+    <section id="hero" class="hero">
+
+      <!-- A. Background System (Optimizado) -->
+      <div class="hero-bg-wrapper">
+        <picture>
+          <source media="(min-width: 768px)" srcset="assets/images/hero-bg-desktop.jpg" />
+          <img src="assets/images/hero-bg-mobile.jpg" alt="Atmósfera oscura - Bosque Desolado" />
+        </picture>
+      </div>
+
+      <!-- B. Overlay de Contraste -->
+      <div class="hero-overlay"></div>
+
+      <!-- C. Contenido -->
+      <div class="container hero-content">
+        <span class="hero-subtitle animate-fade-up delay-1">
+          Escritor de realismo inquietante
+        </span>
+
+        <h1 class="hero-title animate-fade-up delay-2">
+          Una ucronía personal donde convivo con mis propias ficciones.
+        </h1>
+
+        <div class="hero-buttons animate-fade-up delay-3">
+          <a href="https://www.wattpad.com/user/lucainova" target="_blank" rel="noopener" class="btn btn--primary">
+            Leer en Wattpad
+          </a>
+          <a href="https://www.instagram.com/lucainova/" target="_blank" rel="noopener" class="btn btn--secondary">
+            Ver Instagram
+          </a>
         </div>
-      </section>
-    </main>
+      </div>
+    </section>
+  </main>
 
-    <div class="modal-overlay" id="modal-blog">
-      <div class="modal-content" data-aos-duration="500">
-        <button class="modal-close-btn" data-close-modal>&times;</button>
-        <h3 class="modal-title">BIENVENIDO AL BLOG</h3>
-        <img
-          src="assets/images/modal-placeholder.jpg"
-          alt="Imagen del Blog"
-          class="modal-image"
-        />
-        <p class="modal-text">
-          Aquí encontrarás artículos, reflexiones y noticias sobre mis últimos
-          proyectos literarios. Explora los rincones de mi universo creativo.
-        </p>
-        <a
-          href="https://tu-blog.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="modal-action-btn"
-          >Ir al Blog</a
-        >
-      </div>
-    </div>
-    <div class="modal-overlay" id="modal-patreon">
-      <div class="modal-content" data-aos-duration="500">
-        <button class="modal-close-btn" data-close-modal>&times;</button>
-        <h3 class="modal-title">APOYA MI TRABAJO</h3>
-        <img
-          src="assets/images/modal-placeholder.jpg"
-          alt="Imagen de Patreon"
-          class="modal-image"
-        />
-        <p class="modal-text">
-          Con tu apoyo en Patreon, puedo dedicar más tiempo a escribir y crear
-          nuevas historias para ti. ¡Accede a contenido exclusivo!
-        </p>
-        <a
-          href="https://tu-patreon.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="modal-action-btn"
-          >Visitar Patreon</a
-        >
-      </div>
-    </div>
-    <div class="modal-overlay" id="modal-newsletter">
-      <div class="modal-content" data-aos-duration="500">
-        <button class="modal-close-btn" data-close-modal>&times;</button>
-        <h3 class="modal-title">ÚNETE AL NEWSLETTER</h3>
-        <img
-          src="assets/images/modal-placeholder.jpg"
-          alt="Imagen de Newsletter"
-          class="modal-image"
-        />
-        <p class="modal-text">
-          Suscríbete para recibir en tu correo las últimas novedades,
-          lanzamientos de libros y contenido especial que no encontrarás en otro
-          lugar.
-        </p>
-        <a href="#link-a-tu-formulario" class="modal-action-btn">Suscribirme</a>
-      </div>
-    </div>
+  <script src="js/main.js" defer></script>
+</body>
 
-    <div class="modal-overlay" id="modal-easteregg">
-      <div class="modal-content" data-aos-duration="500">
-        <button class="modal-close-btn" data-close-modal>&times;</button>
-        <h3 class="modal-title">¡UN SECRETO!</h3>
-        <p class="modal-text">
-          Has encontrado un pequeño secreto. Gracias por tu curiosidad. Aquí
-          tienes una cita que me inspira:
-        </p>
-        <blockquote class="quote-container">
-          <p class="quote-text" id="easter-egg-quote"></p>
-          <footer class="quote-author" id="easter-egg-author"></footer>
-        </blockquote>
-      </div>
-    </div>
-
-    <script
-      src="https://kit.fontawesome.com/d36a77a071.js"
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script src="js/main.js"></script>
-  </body>
 </html>
