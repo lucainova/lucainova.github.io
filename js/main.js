@@ -1,89 +1,75 @@
-// Principio de Mantenibilidad: 'use-strict' previene errores comunes y promueve un código más seguro.
-"use strict";
+/**
+ * LUCA INOVA - ARQUITECTURA JS
+ * Principio: Interactividad mínima y eficiente.
+ */
 
 document.addEventListener("DOMContentLoaded", () => {
-  // 1. INICIALIZACIÓN DE LIBRERÍAS EXTERNAS
-  AOS.init({
-    duration: 800,
-    once: true,
-    offset: 50,
+  // --- 1. CONFIGURACIÓN DEL MENÚ MÓVIL ---
+  const mobileBtn = document.querySelector(".mobile-menu-btn");
+  const navLinks = document.querySelector(".nav-links");
+  const navOverlay = document.querySelector(".mobile-nav-overlay");
+  const body = document.body;
+
+  // Función para alternar el estado
+  function toggleMenu() {
+    const isOpen = navLinks.classList.contains("active");
+
+    // Toggle de clases
+    mobileBtn.classList.toggle("active");
+    navLinks.classList.toggle("active");
+    navOverlay.classList.toggle("active");
+
+    // Bloquear scroll cuando el menú está abierto para evitar "scroll-bleeding"
+    if (!isOpen) {
+      body.style.overflow = "hidden";
+    } else {
+      body.style.overflow = "";
+    }
+  }
+
+  // Funciones para cerrar
+  function closeMenu() {
+    mobileBtn.classList.remove("active");
+    navLinks.classList.remove("active");
+    navOverlay.classList.remove("active");
+    body.style.overflow = "";
+  }
+
+  // Event Listeners
+  if (mobileBtn) {
+    mobileBtn.addEventListener("click", toggleMenu);
+  }
+
+  // Cerrar al hacer click en el overlay oscuro
+  if (navOverlay) {
+    navOverlay.addEventListener("click", closeMenu);
+  }
+
+  // Cerrar al hacer click en cualquier enlace (navegación fluida)
+  const navItems = document.querySelectorAll(".nav-links a");
+  navItems.forEach((item) => {
+    item.addEventListener("click", closeMenu);
   });
 
-  // ========================================================
-  // 2. LÓGICA DE VENTANAS MODALES (CON ANIMACIÓN DE CIERRE)
-  // ========================================================
-  const openButtons = document.querySelectorAll("[data-modal-target]");
-  const closeButtons = document.querySelectorAll("[data-close-modal]");
-  const overlays = document.querySelectorAll(".modal-overlay");
+  // --- 2. GESTIÓN DE ANIMACIONES HERO (Simple & Clean) ---
+  // Usamos IntersectionObserver para detectar cuando los elementos entran en pantalla
+  // En el caso del hero, como ya está en pantalla, el CSS delay maneja la entrada inicial.
+  // Este código queda preparado para secciones futuras "fade-on-scroll".
 
-  // Función para cerrar un modal
-  const closeModal = (modal) => {
-    if (!modal) return;
-    modal.classList.add("is-closing"); // Añade clase para la animación de salida
-    // Espera a que termine la animación antes de ocultarlo por completo
-    setTimeout(() => {
-      modal.classList.remove("is-visible");
-      modal.classList.remove("is-closing");
-      document.body.style.overflow = "auto";
-    }, 350); // Debe coincidir con la duración de la transición en CSS
+  const observerOptions = {
+    threshold: 0.1,
   };
 
-  // ASIGNAR LISTENERS PARA ABRIR
-  openButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const modal = document.querySelector(button.dataset.modalTarget);
-      if (modal) {
-        // Lógica especial para el modal de Easter Egg
-        if (modal.id === "modal-easteregg") {
-          const quotes = [
-            {
-              text: "El arte de escribir es el arte de descubrir lo que crees.",
-              author: "Gustave Flaubert",
-            },
-            {
-              text: "No hay amigo tan leal como un libro.",
-              author: "Ernest Hemingway",
-            },
-            {
-              text: "Siempre imaginé que el Paraíso sería algún tipo de biblioteca.",
-              author: "Jorge Luis Borges",
-            },
-            {
-              text: "Un lector vive mil vidas antes de morir... El que no lee solo vive una.",
-              author: "George R.R. Martin",
-            },
-            {
-              text: "La pluma es la lengua del alma.",
-              author: "Miguel de Cervantes",
-            },
-          ];
-          const { text, author } =
-            quotes[Math.floor(Math.random() * quotes.length)];
-          document.getElementById("easter-egg-quote").textContent = `“${text}”`;
-          document.getElementById(
-            "easter-egg-author"
-          ).textContent = `- ${author}`;
-        }
-        modal.classList.add("is-visible");
-        document.body.style.overflow = "hidden";
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible"); // Clase que activaría animaciones si no fueran automáticas
+        observer.unobserve(entry.target); // Solo animar una vez
       }
     });
-  });
+  }, observerOptions);
 
-  // ASIGNAR LISTENERS PARA CERRAR (CON EL BOTÓN 'X')
-  closeButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const modal = button.closest(".modal-overlay");
-      closeModal(modal);
-    });
-  });
-
-  // ASIGNAR LISTENERS PARA CERRAR (CON EL FONDO OVERLAY)
-  overlays.forEach((overlay) => {
-    overlay.addEventListener("click", (event) => {
-      if (event.target === overlay) {
-        closeModal(overlay);
-      }
-    });
-  });
+  // Seleccionamos elementos animados futuros (Secciones Vitrina, etc)
+  // const animatedElements = document.querySelectorAll('.scroll-animate');
+  // animatedElements.forEach(el => observer.observe(el));
 });
