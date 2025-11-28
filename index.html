@@ -7,67 +7,58 @@
   <meta name="description"
     content="Luca Inova - Escritor de realismo inquietante. Una ucronía personal donde convivo con mis propias ficciones. Córdoba, Argentina." />
   <title>Luca Inova | Narrativa Oscura</title>
-
-  <!-- 1. Sistema de Estilos: Cascada Estricta -->
-  <!-- Nivel 1: Core Global (Reset, Vars, Header, Footer, Fuentes) -->
+  <!-- 1. CARGA DE FUENTES DE ALTA VELOCIDAD -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- SOLUCIÓN: Cargamos New Rocker aquí. display=block evita el parpadeo de fuente fea -->
+  <link href="https://fonts.googleapis.com/css2?family=New+Rocker&display=block" rel="stylesheet">
   <link rel="stylesheet" href="css/core/global.css">
-  <!-- Nivel 2: Animaciones (Biblioteca de movimientos) -->
   <link rel="stylesheet" href="css/core/animations.css">
-  <!-- Nivel 3: Página Específica (Solo lo que usa el Hero) -->
   <link rel="stylesheet" href="css/pages/home.css">
 
-  <!-- Estilos Críticos de Carga (Inline para evitar parpadeo blanco inicial) -->
+  <!-- 4. ANTI-PARPADEO VISUAL OPTIMIZADO -->
   <style>
-    .hero {
-      min-height: 100vh;
+    /* Aplicamos el hidden a una clase .reveal, o al 'main' y 'header' 
+       directamente, NO al body, para no romper el fixed background */
+
+    /* OPCIÓN A: Si usas la estructura body > main, ocultamos solo main y header */
+    body>header,
+    body>main {
       opacity: 0;
-      animation: fadeInPage 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+      transition: opacity 0.5s ease;
     }
 
-    @keyframes fadeInPage {
-      to {
-        opacity: 1;
-      }
+    /* El estado cargado se añade por JS */
+    body.loaded>header,
+    body.loaded>main {
+      opacity: 1;
     }
   </style>
 </head>
 
 <body>
-  <!-- 1. HEADER (Navegación Global MPA) -->
   <header class="site-header">
     <div class="container nav-flex">
-
-      <!-- Marca Personal -->
-      <!-- Corrección: Apunta a index.html para recargar la home -->
       <a href="index.html" class="logo">LUCA INOVA</a>
-
-      <!-- Botón Móvil (Hamburguesa) -->
       <button class="mobile-menu-btn" aria-label="Alternar menú de navegación">
         <span class="bar"></span>
         <span class="bar"></span>
         <span class="bar"></span>
       </button>
 
-      <!-- Enlaces de Navegación (RUTAS CORREGIDAS PARA MULTI-PAGE) -->
       <nav class="nav-links">
-        <!-- En lugar de IDs (#), usamos rutas relativas a los archivos -->
         <a href="obras.html">Relatos</a>
         <a href="visual.html">Visual</a>
-        <a href="sobre-mi.html">Sobre mí</a>
+        <a href="sobre_mi.html">Sobre mí</a>
         <a href="contacto.html">Contacto</a>
       </nav>
-
-      <!-- Overlay Oscuro para móvil -->
       <div class="mobile-nav-overlay"></div>
     </div>
   </header>
 
-  <!-- 2. CONTENIDO PRINCIPAL -->
   <main>
-    <!-- SECCIÓN HERO -->
     <section id="hero" class="hero">
 
-      <!-- A. Background System (Optimizado Mobile First) -->
       <div class="hero-bg-wrapper">
         <picture>
           <source media="(min-width: 768px)" srcset="assets/images/hero-bg-desktop.jpg" />
@@ -75,25 +66,19 @@
         </picture>
       </div>
 
-      <!-- B. Overlay de Contraste -->
       <div class="hero-overlay"></div>
 
-      <!-- C. Contenido -->
       <div class="container hero-content">
         <span class="hero-subtitle animate-fade-up delay-1">
           Escritor de realismo inquietante
         </span>
-
         <h1 class="hero-title animate-fade-up delay-2">
           Una ucronía personal donde convivo con mis propias ficciones.
         </h1>
-
         <div class="hero-buttons animate-fade-up delay-3">
-          <!-- CTA Primario: Wattpad Externo -->
           <a href="https://www.wattpad.com/user/lucainova" target="_blank" rel="noopener" class="btn btn--primary">
             Leer en Wattpad
           </a>
-          <!-- CTA Secundario: Instagram Externo (Si quisieras ir a Visual interno, sería visual.html) -->
           <a href="https://www.instagram.com/lucainova/" target="_blank" rel="noopener" class="btn btn--secondary">
             Ver Instagram
           </a>
@@ -102,7 +87,6 @@
     </section>
   </main>
 
-  <!-- Lógica JavaScript (Común a todas las páginas) -->
   <script src="js/main.js" defer></script>
 </body>
 

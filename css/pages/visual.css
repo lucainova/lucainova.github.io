@@ -2,6 +2,16 @@
    PÁGINA: VISUAL / INSTAGRAM FEED
    ========================================= */
 
+/* --- FIX DE SCROLL PARA FONDOS --- */
+/* Sobrescribimos el global para fijar la imagen y que no se corte al bajar */
+.hero-bg-wrapper,
+.hero-overlay {
+    position: fixed;
+    /* Mantiene el fondo estático */
+    width: 100vw;
+    height: 100vh;
+}
+
 main {
     padding-top: 15rem;
     /* Compensar header fijo */
@@ -13,12 +23,15 @@ main {
     text-align: center;
     margin-bottom: 8rem;
     padding: 0 2rem;
+    position: relative;
+    z-index: 2;
+    /* Encima del fondo */
 }
 
 .kicker {
     display: block;
     font-family: var(--font-heading);
-    font-size: 1.6rem;
+    font-size: 2.5rem;
     color: var(--color-accent-gold);
     letter-spacing: 2px;
     margin-bottom: 2rem;
@@ -27,7 +40,6 @@ main {
 .page-title {
     font-family: var(--font-heading);
     font-size: clamp(4rem, 6vw, 7rem);
-    /* Grande y audaz */
     line-height: 1;
     color: var(--color-text-body);
     margin-bottom: 3rem;
@@ -38,21 +50,16 @@ main {
     max-width: 700px;
     margin: 0 auto 4rem;
     font-size: 2rem;
-    /* Legibilidad aumentada */
     line-height: 1.6;
     color: rgba(235, 214, 165, 0.8);
 }
 
 /* --- REFACTORIZACIÓN: BOTÓN CONSISTENTE (RECTANGULAR) --- */
-/* Ahora hereda y refuerza el estilo "bloque" del sistema global */
 .btn-instagram {
     display: inline-block;
     padding: 1.8rem 4rem;
-    /* Padding igualado a global.css */
     font-size: 2rem;
-    /* Tamaño de fuente igualado a global.css */
     border-radius: 0;
-    /* Cero radio: Rectangular estricto */
 
     background: transparent;
     border: 2px solid var(--color-accent-gold);
@@ -65,12 +72,10 @@ main {
 }
 
 .btn-instagram:hover {
-    /* Mismo comportamiento que btn--secondary global */
     background: rgba(204, 163, 72, 0.2);
     color: #fff;
     border-color: #fff;
     transform: translateY(-5px);
-    /* Animación de elevación consistente */
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 }
 
@@ -78,6 +83,8 @@ main {
 .gallery-section {
     position: relative;
     padding-bottom: 5rem;
+    z-index: 2;
+    /* Encima del fondo */
 }
 
 .insta-grid {
@@ -110,7 +117,7 @@ main {
     opacity: 0.9;
 }
 
-/* Efecto Hover: Imagen se acerca */
+/* Efecto Hover */
 .post-card:hover {
     border-color: var(--color-accent-gold);
     transform: translateY(-5px);
@@ -120,7 +127,6 @@ main {
 .post-card:hover img {
     transform: scale(1.1);
     opacity: 0.5;
-    /* Se oscurece para dejar ver el texto */
 }
 
 /* OVERLAY CON TEXTO */
@@ -134,14 +140,12 @@ main {
     align-items: center;
     justify-content: center;
     opacity: 0;
-    /* Invisible por defecto */
     transition: opacity 0.3s ease;
     z-index: 2;
 }
 
 .post-card:hover .post-overlay {
     opacity: 1;
-    /* Visible al hover */
 }
 
 .overlay-text {
@@ -159,7 +163,6 @@ main {
 @media (max-width: 768px) {
     .insta-grid {
         grid-template-columns: 1fr;
-        /* Una columna en móvil para que se vean grandes */
         max-width: 450px;
     }
 

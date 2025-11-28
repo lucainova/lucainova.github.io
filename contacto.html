@@ -6,25 +6,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Contacta con Luca Inova. Colaboraciones, prensa y comunidad Los Epístoles.">
     <title>Contacto | Luca Inova</title>
+    <!-- 1. CARGA DE FUENTES DE ALTA VELOCIDAD -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- SOLUCIÓN: Cargamos New Rocker aquí. display=block evita el parpadeo de fuente fea -->
+    <link href="https://fonts.googleapis.com/css2?family=New+Rocker&display=block" rel="stylesheet">
+    <!-- 4. ANTI-PARPADEO VISUAL OPTIMIZADO -->
+    <style>
+        /* Aplicamos el hidden a una clase .reveal, o al 'main' y 'header' 
+       directamente, NO al body, para no romper el fixed background */
 
+        /* OPCIÓN A: Si usas la estructura body > main, ocultamos solo main y header */
+        body>header,
+        body>main {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        /* El estado cargado se añade por JS */
+        body.loaded>header,
+        body.loaded>main {
+            opacity: 1;
+        }
+    </style>
+    <!-- CORE CSS -->
     <link rel="stylesheet" href="css/core/global.css">
     <link rel="stylesheet" href="css/core/animations.css">
 
-    <!-- Importamos estilos de Formulario -->
-    <link rel="stylesheet" href="css/pages/contact.css">
+    <!-- PAGE CSS -->
+    <link rel="stylesheet" href="css/pages/contacto.css">
 </head>
 
 <body>
 
     <header class="site-header">
         <div class="container nav-flex">
+            <!-- Logo -->
             <a href="index.html" class="logo">LUCA INOVA</a>
-            <button class="mobile-menu-btn" aria-label="Menú"><span class="bar"></span><span class="bar"></span><span
-                    class="bar"></span></button>
+
+            <!-- Móvil -->
+            <button class="mobile-menu-btn" aria-label="Menú">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
+            <!-- Navegación -->
             <nav class="nav-links">
                 <a href="obras.html">Relatos</a>
                 <a href="visual.html">Visual</a>
-                <a href="sobre-mi.html">Sobre mí</a>
+                <a href="sobre_mi.html">Sobre mí</a>
                 <!-- ACTIVO -->
                 <a href="contacto.html" class="current-page">Contacto</a>
             </nav>
@@ -33,6 +64,15 @@
     </header>
 
     <main>
+        <!-- Background System (Fixed) -->
+        <div class="hero-bg-wrapper">
+            <picture>
+                <source media="(min-width: 768px)" srcset="assets/images/hero-bg-desktop.jpg" />
+                <img src="assets/images/hero-bg-mobile.jpg" alt="Atmósfera oscura" />
+            </picture>
+        </div>
+        <div class="hero-overlay"></div>
+
         <section class="container contact-section animate-fade-up">
 
             <div class="contact-header">
@@ -41,9 +81,9 @@
             </div>
 
             <div class="form-wrapper">
-                <!-- FORMULARIO DE CONTACTO PROFESIONAL -->
-                <!-- action="URL_DE_FORMSPREE" se añadirá cuando tengas el link -->
-                <form action="https://formspree.io/f/TU_CODIGO_AQUI" method="POST" class="noir-form">
+
+                <!-- COLUMNA IZQUIERDA: FORMULARIO -->
+                <form action="https://www.youtube.com/watch?v=dQw4w9WgXcQ" method="POST" class="noir-form">
 
                     <div class="input-group">
                         <label for="name">Nombre</label>
@@ -57,27 +97,42 @@
 
                     <div class="input-group">
                         <label for="message">Mensaje</label>
-                        <textarea id="message" name="message" rows="5" required
-                            placeholder="Escribe aquí..."></textarea>
+                        <textarea id="message" name="message" required placeholder="Escribe aquí..."></textarea>
                     </div>
 
-                    <!-- Botón Consistente -->
                     <button type="submit" class="btn btn--primary full-width">Enviar Mensaje</button>
                 </form>
 
-                <!-- NEWSLETTER SIDE BLOCK -->
-                <div class="newsletter-block">
-                    <h3>Comunidad <span class="gold">Los Epístoles</span></h3>
-                    <p>Recibe un micro-cuento exclusivo el primer domingo de cada mes y adelantos de portadas.</p>
-                    <div class="newsletter-cta">
-                        <!-- Botón enlace a Landing Page de suscripción o Anchor -->
-                        <span class="mock-btn">Próximamente disponible</span>
+                <!-- COLUMNA DERECHA: SIDEBAR DE COMUNIDAD -->
+                <aside class="sidebar-wrapper">
+
+                    <!-- 1. BLOQUE NEWSLETTER -->
+                    <div class="newsletter-block">
+                        <h3>Comunidad <span class="gold">Los Epístoles</span></h3>
+                        <p>Recibe un micro-cuento exclusivo el primer domingo de cada mes y adelantos de portadas.</p>
+
+                        <div class="newsletter-cta">
+                            <span class="mock-btn gold-border">Suscripción (Próximamente)</span>
+                        </div>
                     </div>
+
+                    <!-- 2. BLOQUE PATREON (Mecenas) -->
+                    <div class="newsletter-block patreon-block">
+                        <h3>Círculo <span class="red-tone">Mecenas</span></h3>
+                        <p>Apoya el terror independiente y accede al proceso de escritura en crudo.</p>
+
+                        <div class="newsletter-cta">
+                            <span class="mock-btn red-border">Patreon (No disponible aún)</span>
+                        </div>
+                    </div>
+
+                    <!-- SOCIAL FOOTER -->
                     <div class="social-links-footer">
                         <a href="https://instagram.com/lucainova" target="_blank">Instagram ↗</a>
                         <a href="https://wattpad.com/user/lucainova" target="_blank">Wattpad ↗</a>
                     </div>
-                </div>
+
+                </aside>
 
             </div>
 
