@@ -2,6 +2,12 @@
  * LUCA INOVA - ARQUITECTURA JS
  * Principio: Interactividad mínima y eficiente.
  */
+window.addEventListener('load', () => {
+  // Al cargar todo, añadimos la clase .loaded al body
+  // Esto dispara la transición de opacidad en Header y Main,
+  // PERO deja el fondo (que está fixed) intacto desde el principio.
+  document.body.classList.add('loaded');
+});
 
 document.addEventListener("DOMContentLoaded", () => {
   // --- 1. CONFIGURACIÓN DEL MENÚ MÓVIL ---

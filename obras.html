@@ -7,13 +7,35 @@
     <meta name="description"
         content="Bibliografía de Luca Inova. Selectos del Invierno, Los Cinco Epístoles y narrativa oscura.">
     <title>Obras | Luca Inova</title>
+    <!-- 1. CARGA DE FUENTES DE ALTA VELOCIDAD -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- SOLUCIÓN: Cargamos New Rocker aquí. display=block evita el parpadeo de fuente fea -->
+    <link href="https://fonts.googleapis.com/css2?family=New+Rocker&display=block" rel="stylesheet">
+    <!-- 4. ANTI-PARPADEO VISUAL OPTIMIZADO -->
+    <style>
+        /* Aplicamos el hidden a una clase .reveal, o al 'main' y 'header' 
+       directamente, NO al body, para no romper el fixed background */
 
+        /* OPCIÓN A: Si usas la estructura body > main, ocultamos solo main y header */
+        body>header,
+        body>main {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        /* El estado cargado se añade por JS */
+        body.loaded>header,
+        body.loaded>main {
+            opacity: 1;
+        }
+    </style>
     <!-- 1. Estilos CORE (Cimientos) -->
     <link rel="stylesheet" href="css/core/global.css">
     <link rel="stylesheet" href="css/core/animations.css">
 
-    <!-- 2. Estilos DE PÁGINA (Específicos) -->
-    <link rel="stylesheet" href="css/pages/works.css">
+    <!-- 2. Estilos DE PÁGINA -->
+    <link rel="stylesheet" href="css/pages/obras.css">
 </head>
 
 <body>
@@ -36,7 +58,7 @@
             <nav class="nav-links">
                 <a href="obras.html" class="current-page">Relatos</a>
                 <a href="visual.html">Visual</a>
-                <a href="sobre-mi.html">Sobre mí</a>
+                <a href="sobre_mi.html">Sobre mí</a>
                 <a href="contacto.html">Contacto</a>
             </nav>
 
@@ -45,6 +67,16 @@
     </header>
 
     <main>
+        <!-- A. Background System -->
+        <div class="hero-bg-wrapper">
+            <picture>
+                <source media="(min-width: 768px)" srcset="assets/images/hero-bg-desktop.jpg" />
+                <img src="assets/images/hero-bg-mobile.jpg" alt="Atmósfera oscura - Bosque Desolado" />
+            </picture>
+        </div>
+
+        <!-- B. Overlay de Contraste -->
+        <div class="hero-overlay"></div>
 
         <!-- ENCABEZADO DE SECCIÓN -->
         <section class="works-hero animate-fade-up">
@@ -77,8 +109,8 @@
 
                     <div class="book-actions">
                         <a href="https://www.wattpad.com/story/375903761-selectos-del-invierno" target="_blank"
-                            class="btn btn--primary">Leer Novela</a>
-                        <span class="meta-info">2024 • Terror / Suspenso</span>
+                            class="btn btn--primary">Leer Historias</a>
+                        <span class="meta-info">2025 • Terror / Suspenso</span>
                     </div>
                 </div>
 
@@ -112,7 +144,7 @@
                     <h3 class="book-title-sm">Proyecto Anómalo</h3>
                     <p class="book-excerpt">Trece incursiones en un realismo donde lo cotidiano se vuelve amenaza. De
                         Lanús a Villa Crespo, algo acecha.</p>
-                    <span class="status-text">Próximamente 2025</span>
+                    <span class="status-text">Próximamente 2026</span>
                 </div>
             </article>
 

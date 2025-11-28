@@ -7,7 +7,29 @@
     <meta name="description"
         content="El universo visual de Luca Inova. Detrás de escena, estética noir y proceso creativo.">
     <title>Visual | Luca Inova</title>
+    <!-- 1. CARGA DE FUENTES DE ALTA VELOCIDAD -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- SOLUCIÓN: Cargamos New Rocker aquí. display=block evita el parpadeo de fuente fea -->
+    <link href="https://fonts.googleapis.com/css2?family=New+Rocker&display=block" rel="stylesheet">
+    <!-- 4. ANTI-PARPADEO VISUAL OPTIMIZADO -->
+    <style>
+        /* Aplicamos el hidden a una clase .reveal, o al 'main' y 'header' 
+       directamente, NO al body, para no romper el fixed background */
 
+        /* OPCIÓN A: Si usas la estructura body > main, ocultamos solo main y header */
+        body>header,
+        body>main {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        /* El estado cargado se añade por JS */
+        body.loaded>header,
+        body.loaded>main {
+            opacity: 1;
+        }
+    </style>
     <!-- CORE CSS -->
     <link rel="stylesheet" href="css/core/global.css">
     <link rel="stylesheet" href="css/core/animations.css">
@@ -34,7 +56,7 @@
                 <a href="obras.html">Relatos</a>
                 <!-- Estado Activo Aquí -->
                 <a href="visual.html" class="current-page">Visual</a>
-                <a href="sobre-mi.html">Sobre mí</a>
+                <a href="sobre_mi.html">Sobre mí</a>
                 <a href="contacto.html">Contacto</a>
             </nav>
 
@@ -43,6 +65,17 @@
     </header>
 
     <main>
+
+        <!-- SISTEMA DE FONDO (FALTABA ESTO) -->
+        <!-- Inyectamos el fondo aquí para que no sea marrón plano -->
+        <div class="hero-bg-wrapper">
+            <picture>
+                <source media="(min-width: 768px)" srcset="assets/images/hero-bg-desktop.jpg" />
+                <img src="assets/images/hero-bg-mobile.jpg" alt="Atmósfera oscura" />
+            </picture>
+        </div>
+        <div class="hero-overlay"></div>
+
 
         <!-- SECCIÓN 1: INTRO ATMOSFÉRICA -->
         <section class="visual-header animate-fade-up">
@@ -53,7 +86,8 @@
                     La narrativa no solo se lee; se observa. Fragmentos, texturas y el detrás de escena de la intriga.
                 </p>
 
-                <a href="https://www.instagram.com/lucainova/" target="_blank" class="btn btn--secondary btn-instagram">
+                <!-- Botón refactorizado -->
+                <a href="https://www.instagram.com/lucainova/" target="_blank" class="btn btn--primary">
                     Seguir en Instagram
                 </a>
             </div>

@@ -2,6 +2,14 @@
    PÁGINA: SOBRE MÍ / BIO
    ========================================= */
 
+/* FIX DE SCROLL PARA FONDOS (Obligatorio para que no se corte) */
+.hero-bg-wrapper,
+.hero-overlay {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+}
+
 main {
     padding-top: 15rem;
     min-height: 100vh;
@@ -14,6 +22,9 @@ main {
     /* Columna izq pequeña, der ancha */
     gap: 8rem;
     align-items: start;
+    position: relative;
+    z-index: 1;
+    /* Encima del fondo */
 }
 
 /* 1. IMAGEN DE AUTOR */
@@ -45,7 +56,7 @@ main {
 
 .meta-label {
     display: block;
-    font-size: 1.2rem;
+    font-size: 2rem;
     color: var(--color-accent-gold);
     text-transform: uppercase;
     margin-bottom: 0.5rem;
@@ -53,7 +64,7 @@ main {
 
 .meta-value {
     display: block;
-    font-size: 1.6rem;
+    font-size: 2rem;
     margin-bottom: 2rem;
 }
 
@@ -82,8 +93,8 @@ main {
     font-family: var(--font-heading);
     font-size: 8rem;
     line-height: 0.8;
-    padding-top: 1rem;
-    padding-right: 1.5rem;
+    padding-top: 0.5rem;
+    padding-right: 1rem;
     color: var(--color-accent-gold);
 }
 
@@ -106,7 +117,6 @@ main {
 
     .bio-text {
         text-align: left;
+        /* En móvil no justificamos para evitar ríos de espacios */
     }
-
-    /* En móvil no justificamos para evitar ríos de espacios */
 }

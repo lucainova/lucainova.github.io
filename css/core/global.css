@@ -1,13 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=New+Rocker&display=swap');
-
 /* =========================================
    CORE: VARIABLES Y MODULOS GLOBALES
    ========================================= */
+
 :root {
     /* -- PALETA 'NOIR ACADÉMICO' -- */
     --color-bg-primary: #160701;
     --color-bg-mobile-menu: #0a0300;
-    /* Casi negro absoluto para el menú móvil */
     --color-bg-overlay: rgba(22, 7, 1, 0.7);
 
     --color-accent-gold: #cca348;
@@ -15,26 +13,27 @@
 
     /* Fuentes */
     --font-heading: "Hertical Serif Rough", serif;
-    --font-body: "New Rocker", system-ui;
+    /* Fallback añadido para seguridad */
+    --font-body: "New Rocker", system-ui, cursive;
 
     /* Tamaños Globales */
     --container-width: 1200px;
 }
 
-/* CARGA DE FUENTES */
+/* CARGA DE FUENTES LOCALES */
 @font-face {
     font-family: "Hertical Serif Rough";
     src: url("../../assets/fonts/HerticalSerifRough.otf") format("opentype");
-    font-display: swap;
+    /* USAMOS 'BLOCK' PARA EVITAR EL PARPADEO (FOUT) */
+    /* El texto permanece invisible hasta que la fuente carga */
+    font-display: block;
 }
 
-@font-face {
-    font-family: "Sigher";
-    src: url("../../assets/fonts/SigherRegular.ttf") format("truetype");
-    font-display: swap;
-}
+/* Sigher eliminada para limpiar código muerto */
 
-/* RESET */
+/* =========================================
+   RESET & ESTRUCTURA (ANTI-FLICKER)
+   ========================================= */
 *,
 *::before,
 *::after {
@@ -46,15 +45,19 @@
 html {
     font-size: 62.5%;
     scroll-behavior: smooth;
+    /* FIX: El color base va aquí para que el fondo fijo no parpadee marrón */
+    background-color: var(--color-bg-primary);
 }
 
 body {
     font-family: var(--font-body);
     font-size: 1.8rem;
-    background-color: var(--color-bg-primary);
+    /* FIX: Body transparente para dejar ver el fondo z-index -1 */
+    background-color: transparent;
     color: var(--color-text-body);
     overflow-x: hidden;
     line-height: 1.6;
+    min-height: 100vh;
 }
 
 a {
@@ -77,6 +80,37 @@ img {
 }
 
 /* =========================================
+   SISTEMA DE FONDOS GLOBAL (PARALLAX FIX)
+   ========================================= */
+/* FIX: z-index ajustado a -1 para estar sobre el html pero bajo el texto */
+.hero-bg-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.hero-bg-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.hero-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(0, 0, 0, 0.3) 0%, #160701 90%);
+    z-index: -1;
+    /* Igual que la imagen, el orden en HTML decide la superposición */
+}
+
+/* =========================================
    COMPONENTE: HEADER (Navegación)
    ========================================= */
 .site-header {
@@ -85,7 +119,6 @@ img {
     left: 0;
     width: 100%;
     z-index: 1000;
-    /* Capa Base Header */
     padding: 2rem 0;
     transition: all 0.4s ease;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 0%, transparent 100%);
@@ -102,10 +135,8 @@ img {
     justify-content: space-between;
     align-items: center;
     position: relative;
-    /* Contexto para absolutos */
 }
 
-/* LOGO */
 .logo {
     font-family: var(--font-heading);
     color: var(--color-accent-gold);
@@ -114,7 +145,6 @@ img {
     line-height: 1;
     text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
     z-index: 1002;
-    /* Siempre visible, incluso sobre el menú abierto */
     position: relative;
 }
 
@@ -153,80 +183,57 @@ img {
     width: 100%;
 }
 
-/* --- BOTÓN HAMBURGUESA (Móvil) --- */
+/* MENÚ MÓVIL */
 .mobile-menu-btn {
     display: none;
-    /* Oculto en PC */
     background: transparent;
     border: none;
     padding: 1rem;
     cursor: pointer;
     z-index: 2000;
-    /* ULTRA PRIORIDAD: Encima de todo */
 }
 
 .mobile-menu-btn .bar {
     display: block;
     width: 35px;
     height: 4px;
-    /* Un poco más gruesas para visibilidad */
     margin: 6px 0;
     background-color: var(--color-accent-gold);
-    /* Variable */
     border-radius: 2px;
     transition: all 0.3s ease-in-out;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
-    /* Sombra dura para destacar sobre cualquier fondo */
 }
 
-/* =========================================
-   MEDIA QUERY: VERSIÓN MÓVIL (< 900px)
-   ========================================= */
 @media (max-width: 900px) {
-
-    /* 1. MOSTRAR BOTÓN */
     .mobile-menu-btn {
         display: block !important;
-        /* Fuerza bruta para asegurar visibilidad */
     }
 
-    /* 2. PANEL LATERAL (Off-Canvas) */
     .nav-links {
         position: fixed;
         top: 0;
         right: -100%;
-        /* Escondido a la derecha */
         width: 85%;
         max-width: 350px;
         height: 100vh;
-
         background-color: var(--color-bg-mobile-menu);
         box-shadow: -10px 0 50px rgba(0, 0, 0, 1);
-        /* Sombra profunda izquierda */
         border-left: 1px solid rgba(204, 163, 72, 0.2);
-
-        /* Flexbox vertical para centrar enlaces */
         flex-direction: column;
         justify-content: center;
         align-items: center;
         gap: 5rem;
-
         z-index: 1001;
-        /* Entre Header y Botón */
         transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
         padding-top: 4rem;
-        /* Evitar que el primer link choque con algo arriba */
     }
 
-    /* Clase activa para abrir menú (JS la añade) */
     .nav-links.active {
         right: 0;
     }
 
-    /* 3. ESTILO ENLACES GIGANTES MÓVIL */
     .nav-links a {
         font-size: 2.8rem;
-        /* Muy grande y legible */
         color: #fff;
         text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     }
@@ -235,7 +242,6 @@ img {
         color: var(--color-accent-gold);
     }
 
-    /* Animación del botón a 'X' */
     .mobile-menu-btn.active .bar:nth-child(2) {
         opacity: 0;
     }
@@ -249,7 +255,7 @@ img {
     }
 }
 
-/* Overlay Oscuro Fondo (Backdrop) */
+/* OVERLAY */
 .mobile-nav-overlay {
     position: fixed;
     top: 0;
@@ -269,10 +275,7 @@ img {
     pointer-events: auto;
 }
 
-
-/* =========================================
-   COMPONENTE: BOTONES CTA GLOBAL
-   ========================================= */
+/* COMPONENTE BOTONES CTA */
 .btn {
     display: inline-block;
     font-family: var(--font-heading);
@@ -289,16 +292,17 @@ img {
 }
 
 .btn--primary {
-    background-color: var(--color-accent-gold);
-    color: var(--color-bg-primary);
+    background-color: transparent;
+    color: var(--color-accent-gold);
     font-weight: 900;
 }
 
 .btn--primary:hover {
-    background-color: transparent;
-    color: var(--color-accent-gold);
+    background-color: rgba(204, 163, 72, 0.2);
+    color: #c29c4c;
+    border-color: #c29c4c;
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(204, 163, 72, 0.3);
+    box-shadow: 0 10px 20px rgba(206, 144, 44, 0.5);
 }
 
 .btn--secondary {
@@ -307,12 +311,13 @@ img {
 }
 
 .btn--secondary:hover {
-    background-color: rgba(204, 163, 72, 0.2);
-    color: #fff;
-    border-color: #fff;
+    background-color: rgba(145, 45, 15, 0.314);
+    color: #c29c4c;
+    border-color: #c29c4c;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(206, 144, 44, 0.5);
 }
 
-/* Indicador de Página Activa */
 .nav-links a.current-page::after {
     width: 100%;
 }

@@ -2,10 +2,23 @@
    PÁGINA: CONTACTO & FORMULARIOS
    ========================================= */
 
+/* FIX SCROLL */
+.hero-bg-wrapper,
+.hero-overlay {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+}
+
 main {
     padding-top: 15rem;
     min-height: 100vh;
     padding-bottom: 5rem;
+}
+
+.contact-section {
+    position: relative;
+    z-index: 1;
 }
 
 .contact-header {
@@ -18,30 +31,32 @@ main {
     font-size: clamp(3rem, 5vw, 6rem);
     color: var(--color-text-body);
     margin-bottom: 1rem;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
 }
 
 .intro-text {
-    font-size: 1.8rem;
+    font-size: 2.1rem;
     color: var(--color-accent-gold);
     opacity: 0.8;
 }
 
 
-/* GRID FORMULARIO */
+/* LAYOUT PRINCIPAL */
 .form-wrapper {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    /* Formulario ancho, Newsletter estrecha */
     gap: 6rem;
     max-width: 1000px;
     margin: 0 auto;
 }
 
-/* ESTILOS DE INPUTS ROBUSTOS */
+/* FORMULARIO IZQUIERDA */
 .noir-form {
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.6);
     padding: 3rem;
-    border: 1px solid rgba(204, 163, 72, 0.1);
+    border: 1px solid rgba(204, 163, 72, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    height: fit-content;
 }
 
 .input-group {
@@ -53,33 +68,40 @@ label {
     font-family: var(--font-heading);
     color: var(--color-accent-gold);
     margin-bottom: 0.8rem;
-    font-size: 1.4rem;
+    font-size: 2.1rem;
     letter-spacing: 1px;
 }
 
 input,
 textarea {
     width: 100%;
+    /* Forzamos ancho completo para igualar */
     background-color: transparent;
     border: none;
     border-bottom: 2px solid rgba(204, 163, 72, 0.3);
-    /* Solo línea abajo clásico */
     padding: 1rem 0;
     color: var(--color-text-body);
     font-family: var(--font-body);
     font-size: 1.8rem;
     transition: all 0.3s;
     border-radius: 0;
-    /* Sin bordes redondos en inputs */
+}
+
+/* --- SOLUCIÓN ROBUSTA TEXTAREA --- */
+textarea {
+    resize: none;
+    /* Bloqueado totalmente */
+    height: 150px;
+    /* Altura fija y digna */
+    /* No usar min-height para evitar variaciones visuales */
 }
 
 input:focus,
 textarea:focus {
     outline: none;
     border-bottom-color: var(--color-accent-gold);
-    background-color: rgba(204, 163, 72, 0.05);
+    background-color: rgba(204, 163, 72, 0.1);
     padding-left: 1rem;
-    /* Pequeña animación de identación */
 }
 
 .full-width {
@@ -89,46 +111,82 @@ textarea:focus {
 }
 
 
-/* NEWSLETTER BLOQUE LATERAL */
+/* SIDEBAR DERECHA */
+.sidebar-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Bloques Genéricos */
 .newsletter-block {
     background-color: rgba(204, 163, 72, 0.05);
-    padding: 3rem;
+    padding: 2.5rem;
     border: 1px solid var(--color-accent-gold);
     text-align: center;
-    align-self: start;
+    backdrop-filter: blur(5px);
 }
 
 .newsletter-block h3 {
     font-family: var(--font-heading);
-    font-size: 2.4rem;
-    margin-bottom: 2rem;
+    font-size: 3.1rem;
+    margin-bottom: 1.5rem;
     color: #fff;
 }
 
+.newsletter-block p {
+    font-size: 1.8rem;
+    margin-bottom: 2.5rem;
+}
+
+/* Colores Texto */
 .gold {
     color: var(--color-accent-gold);
 }
 
-.newsletter-block p {
-    font-size: 1.6rem;
-    margin-bottom: 3rem;
+.red-tone {
+    color: #bd4b4b;
 }
 
+/* Rojo sangre seca */
+
+/* Botón Mock */
 .mock-btn {
     display: block;
     width: 100%;
-    padding: 1rem;
-    border: 1px dashed var(--color-accent-gold);
-    color: var(--color-accent-gold);
-    opacity: 0.7;
+    padding: 1.2rem;
+    background: rgba(0, 0, 0, 0.3);
+    opacity: 0.8;
     cursor: not-allowed;
+    text-transform: uppercase;
+    font-family: var(--font-heading);
+    font-size: 1.7rem;
+    letter-spacing: 1px;
 }
 
+.gold-border {
+    border: 1px dashed var(--color-accent-gold);
+    color: var(--color-accent-gold);
+}
+
+/* Variación Patreon (Rojo Óxido) */
+.patreon-block {
+    background-color: rgba(189, 75, 75, 0.05);
+    border-color: #bd4b4b;
+}
+
+.red-border {
+    border: 1px dashed #bd4b4b;
+    color: #bd4b4b;
+}
+
+/* Redes Footer */
 .social-links-footer {
-    margin-top: 4rem;
+    margin-top: 2rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    align-items: center;
 }
 
 .social-links-footer a {
@@ -136,7 +194,6 @@ textarea:focus {
     text-transform: uppercase;
     border-bottom: 1px solid transparent;
     width: max-content;
-    margin: 0 auto;
 }
 
 .social-links-footer a:hover {
@@ -152,9 +209,8 @@ textarea:focus {
         gap: 4rem;
     }
 
-    .newsletter-block {
-        order: -1;
-        /* En móvil newsletter arriba o abajo? Abajo es mejor para conversión formulario principal */
+    .sidebar-wrapper {
         order: 2;
+        width: 100%;
     }
 }
