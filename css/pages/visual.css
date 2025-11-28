@@ -1,0 +1,173 @@
+/* =========================================
+   PÁGINA: VISUAL / INSTAGRAM FEED
+   ========================================= */
+
+main {
+    padding-top: 15rem;
+    /* Compensar header fijo */
+    min-height: 100vh;
+}
+
+/* 1. INTRO */
+.visual-header {
+    text-align: center;
+    margin-bottom: 8rem;
+    padding: 0 2rem;
+}
+
+.kicker {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    color: var(--color-accent-gold);
+    letter-spacing: 2px;
+    margin-bottom: 2rem;
+}
+
+.page-title {
+    font-family: var(--font-heading);
+    font-size: clamp(4rem, 6vw, 7rem);
+    /* Grande y audaz */
+    line-height: 1;
+    color: var(--color-text-body);
+    margin-bottom: 3rem;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.9);
+}
+
+.intro-text {
+    max-width: 700px;
+    margin: 0 auto 4rem;
+    font-size: 2rem;
+    /* Legibilidad aumentada */
+    line-height: 1.6;
+    color: rgba(235, 214, 165, 0.8);
+}
+
+/* --- REFACTORIZACIÓN: BOTÓN CONSISTENTE (RECTANGULAR) --- */
+/* Ahora hereda y refuerza el estilo "bloque" del sistema global */
+.btn-instagram {
+    display: inline-block;
+    padding: 1.8rem 4rem;
+    /* Padding igualado a global.css */
+    font-size: 2rem;
+    /* Tamaño de fuente igualado a global.css */
+    border-radius: 0;
+    /* Cero radio: Rectangular estricto */
+
+    background: transparent;
+    border: 2px solid var(--color-accent-gold);
+    color: var(--color-accent-gold);
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-instagram:hover {
+    /* Mismo comportamiento que btn--secondary global */
+    background: rgba(204, 163, 72, 0.2);
+    color: #fff;
+    border-color: #fff;
+    transform: translateY(-5px);
+    /* Animación de elevación consistente */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* 2. GRID INSTAGRAM */
+.gallery-section {
+    position: relative;
+    padding-bottom: 5rem;
+}
+
+.insta-grid {
+    display: grid;
+    /* Tres columnas simétricas */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* TARJETAS DE POST */
+.post-card {
+    display: block;
+    position: relative;
+    width: 100%;
+    /* Aspect Ratio cuadrado forzado */
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background-color: #000;
+    border: 1px solid rgba(204, 163, 72, 0.2);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.post-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+    opacity: 0.9;
+}
+
+/* Efecto Hover: Imagen se acerca */
+.post-card:hover {
+    border-color: var(--color-accent-gold);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+}
+
+.post-card:hover img {
+    transform: scale(1.1);
+    opacity: 0.5;
+    /* Se oscurece para dejar ver el texto */
+}
+
+/* OVERLAY CON TEXTO */
+.post-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    /* Invisible por defecto */
+    transition: opacity 0.3s ease;
+    z-index: 2;
+}
+
+.post-card:hover .post-overlay {
+    opacity: 1;
+    /* Visible al hover */
+}
+
+.overlay-text {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: var(--color-accent-gold);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 1rem 2rem;
+    border: 2px solid var(--color-accent-gold);
+    background: rgba(22, 7, 1, 0.95);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .insta-grid {
+        grid-template-columns: 1fr;
+        /* Una columna en móvil para que se vean grandes */
+        max-width: 450px;
+    }
+
+    .intro-text {
+        font-size: 1.8rem;
+    }
+}
+
+.spacer-xl {
+    height: 100px;
+}

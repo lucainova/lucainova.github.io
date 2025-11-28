@@ -1,0 +1,160 @@
+/* =========================================
+   PÁGINA: CONTACTO & FORMULARIOS
+   ========================================= */
+
+main {
+    padding-top: 15rem;
+    min-height: 100vh;
+    padding-bottom: 5rem;
+}
+
+.contact-header {
+    text-align: center;
+    margin-bottom: 6rem;
+}
+
+.page-title {
+    font-family: var(--font-heading);
+    font-size: clamp(3rem, 5vw, 6rem);
+    color: var(--color-text-body);
+    margin-bottom: 1rem;
+}
+
+.intro-text {
+    font-size: 1.8rem;
+    color: var(--color-accent-gold);
+    opacity: 0.8;
+}
+
+
+/* GRID FORMULARIO */
+.form-wrapper {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    /* Formulario ancho, Newsletter estrecha */
+    gap: 6rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* ESTILOS DE INPUTS ROBUSTOS */
+.noir-form {
+    background: rgba(255, 255, 255, 0.02);
+    padding: 3rem;
+    border: 1px solid rgba(204, 163, 72, 0.1);
+}
+
+.input-group {
+    margin-bottom: 2.5rem;
+}
+
+label {
+    display: block;
+    font-family: var(--font-heading);
+    color: var(--color-accent-gold);
+    margin-bottom: 0.8rem;
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+}
+
+input,
+textarea {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid rgba(204, 163, 72, 0.3);
+    /* Solo línea abajo clásico */
+    padding: 1rem 0;
+    color: var(--color-text-body);
+    font-family: var(--font-body);
+    font-size: 1.8rem;
+    transition: all 0.3s;
+    border-radius: 0;
+    /* Sin bordes redondos en inputs */
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    border-bottom-color: var(--color-accent-gold);
+    background-color: rgba(204, 163, 72, 0.05);
+    padding-left: 1rem;
+    /* Pequeña animación de identación */
+}
+
+.full-width {
+    width: 100%;
+    text-align: center;
+    margin: 2rem 0 0 0;
+}
+
+
+/* NEWSLETTER BLOQUE LATERAL */
+.newsletter-block {
+    background-color: rgba(204, 163, 72, 0.05);
+    padding: 3rem;
+    border: 1px solid var(--color-accent-gold);
+    text-align: center;
+    align-self: start;
+}
+
+.newsletter-block h3 {
+    font-family: var(--font-heading);
+    font-size: 2.4rem;
+    margin-bottom: 2rem;
+    color: #fff;
+}
+
+.gold {
+    color: var(--color-accent-gold);
+}
+
+.newsletter-block p {
+    font-size: 1.6rem;
+    margin-bottom: 3rem;
+}
+
+.mock-btn {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    border: 1px dashed var(--color-accent-gold);
+    color: var(--color-accent-gold);
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.social-links-footer {
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.social-links-footer a {
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    border-bottom: 1px solid transparent;
+    width: max-content;
+    margin: 0 auto;
+}
+
+.social-links-footer a:hover {
+    border-bottom-color: var(--color-accent-gold);
+    color: var(--color-accent-gold);
+}
+
+
+/* RESPONSIVE */
+@media (max-width: 800px) {
+    .form-wrapper {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+    }
+
+    .newsletter-block {
+        order: -1;
+        /* En móvil newsletter arriba o abajo? Abajo es mejor para conversión formulario principal */
+        order: 2;
+    }
+}

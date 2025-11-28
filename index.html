@@ -8,10 +8,15 @@
     content="Luca Inova - Escritor de realismo inquietante. Una ucronía personal donde convivo con mis propias ficciones. Córdoba, Argentina." />
   <title>Luca Inova | Narrativa Oscura</title>
 
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/animations.css" />
+  <!-- 1. Sistema de Estilos: Cascada Estricta -->
+  <!-- Nivel 1: Core Global (Reset, Vars, Header, Footer, Fuentes) -->
+  <link rel="stylesheet" href="css/core/global.css">
+  <!-- Nivel 2: Animaciones (Biblioteca de movimientos) -->
+  <link rel="stylesheet" href="css/core/animations.css">
+  <!-- Nivel 3: Página Específica (Solo lo que usa el Hero) -->
+  <link rel="stylesheet" href="css/pages/home.css">
 
-  <!-- Estilos Críticos de Carga -->
+  <!-- Estilos Críticos de Carga (Inline para evitar parpadeo blanco inicial) -->
   <style>
     .hero {
       min-height: 100vh;
@@ -28,12 +33,13 @@
 </head>
 
 <body>
-  <!-- 1. HEADER (Navigation) -->
+  <!-- 1. HEADER (Navegación Global MPA) -->
   <header class="site-header">
     <div class="container nav-flex">
 
-      <!-- Marca Personal (Ancla Visual) -->
-      <a href="#" class="logo">LUCA INOVA</a>
+      <!-- Marca Personal -->
+      <!-- Corrección: Apunta a index.html para recargar la home -->
+      <a href="index.html" class="logo">LUCA INOVA</a>
 
       <!-- Botón Móvil (Hamburguesa) -->
       <button class="mobile-menu-btn" aria-label="Alternar menú de navegación">
@@ -42,12 +48,13 @@
         <span class="bar"></span>
       </button>
 
-      <!-- Enlaces de Navegación -->
+      <!-- Enlaces de Navegación (RUTAS CORREGIDAS PARA MULTI-PAGE) -->
       <nav class="nav-links">
-        <a href="#vitrina">Relatos</a>
-        <a href="#pulso">Visual</a>
-        <a href="#sobre-mi">Sobre mí</a>
-        <a href="#contacto">Contacto</a>
+        <!-- En lugar de IDs (#), usamos rutas relativas a los archivos -->
+        <a href="obras.html">Relatos</a>
+        <a href="visual.html">Visual</a>
+        <a href="sobre-mi.html">Sobre mí</a>
+        <a href="contacto.html">Contacto</a>
       </nav>
 
       <!-- Overlay Oscuro para móvil -->
@@ -60,7 +67,7 @@
     <!-- SECCIÓN HERO -->
     <section id="hero" class="hero">
 
-      <!-- A. Background System (Optimizado) -->
+      <!-- A. Background System (Optimizado Mobile First) -->
       <div class="hero-bg-wrapper">
         <picture>
           <source media="(min-width: 768px)" srcset="assets/images/hero-bg-desktop.jpg" />
@@ -82,9 +89,11 @@
         </h1>
 
         <div class="hero-buttons animate-fade-up delay-3">
+          <!-- CTA Primario: Wattpad Externo -->
           <a href="https://www.wattpad.com/user/lucainova" target="_blank" rel="noopener" class="btn btn--primary">
             Leer en Wattpad
           </a>
+          <!-- CTA Secundario: Instagram Externo (Si quisieras ir a Visual interno, sería visual.html) -->
           <a href="https://www.instagram.com/lucainova/" target="_blank" rel="noopener" class="btn btn--secondary">
             Ver Instagram
           </a>
@@ -93,6 +102,7 @@
     </section>
   </main>
 
+  <!-- Lógica JavaScript (Común a todas las páginas) -->
   <script src="js/main.js" defer></script>
 </body>
 

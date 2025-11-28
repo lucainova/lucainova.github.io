@@ -1,0 +1,318 @@
+@import url('https://fonts.googleapis.com/css2?family=New+Rocker&display=swap');
+
+/* =========================================
+   CORE: VARIABLES Y MODULOS GLOBALES
+   ========================================= */
+:root {
+    /* -- PALETA 'NOIR ACADÉMICO' -- */
+    --color-bg-primary: #160701;
+    --color-bg-mobile-menu: #0a0300;
+    /* Casi negro absoluto para el menú móvil */
+    --color-bg-overlay: rgba(22, 7, 1, 0.7);
+
+    --color-accent-gold: #cca348;
+    --color-text-body: #ebd6a5;
+
+    /* Fuentes */
+    --font-heading: "Hertical Serif Rough", serif;
+    --font-body: "New Rocker", system-ui;
+
+    /* Tamaños Globales */
+    --container-width: 1200px;
+}
+
+/* CARGA DE FUENTES */
+@font-face {
+    font-family: "Hertical Serif Rough";
+    src: url("../../assets/fonts/HerticalSerifRough.otf") format("opentype");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Sigher";
+    src: url("../../assets/fonts/SigherRegular.ttf") format("truetype");
+    font-display: swap;
+}
+
+/* RESET */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    font-size: 1.8rem;
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-body);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+    height: auto;
+}
+
+.container {
+    width: 100%;
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 1.6rem;
+}
+
+/* =========================================
+   COMPONENTE: HEADER (Navegación)
+   ========================================= */
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    /* Capa Base Header */
+    padding: 2rem 0;
+    transition: all 0.4s ease;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 0%, transparent 100%);
+}
+
+.site-header.scrolled {
+    padding: 1rem 0;
+    background-color: rgba(10, 3, 0, 0.98);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+}
+
+.nav-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    /* Contexto para absolutos */
+}
+
+/* LOGO */
+.logo {
+    font-family: var(--font-heading);
+    color: var(--color-accent-gold);
+    font-size: clamp(3.2rem, 5vw, 6rem);
+    letter-spacing: 2px;
+    line-height: 1;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+    z-index: 1002;
+    /* Siempre visible, incluso sobre el menú abierto */
+    position: relative;
+}
+
+/* MENÚ ESCRITORIO */
+.nav-links {
+    display: flex;
+    gap: 4rem;
+}
+
+.nav-links a {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+    color: var(--color-text-body);
+    text-transform: uppercase;
+    padding-bottom: 5px;
+    position: relative;
+}
+
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-accent-gold);
+    transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.nav-links a:hover {
+    color: var(--color-accent-gold);
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* --- BOTÓN HAMBURGUESA (Móvil) --- */
+.mobile-menu-btn {
+    display: none;
+    /* Oculto en PC */
+    background: transparent;
+    border: none;
+    padding: 1rem;
+    cursor: pointer;
+    z-index: 2000;
+    /* ULTRA PRIORIDAD: Encima de todo */
+}
+
+.mobile-menu-btn .bar {
+    display: block;
+    width: 35px;
+    height: 4px;
+    /* Un poco más gruesas para visibilidad */
+    margin: 6px 0;
+    background-color: var(--color-accent-gold);
+    /* Variable */
+    border-radius: 2px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
+    /* Sombra dura para destacar sobre cualquier fondo */
+}
+
+/* =========================================
+   MEDIA QUERY: VERSIÓN MÓVIL (< 900px)
+   ========================================= */
+@media (max-width: 900px) {
+
+    /* 1. MOSTRAR BOTÓN */
+    .mobile-menu-btn {
+        display: block !important;
+        /* Fuerza bruta para asegurar visibilidad */
+    }
+
+    /* 2. PANEL LATERAL (Off-Canvas) */
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        /* Escondido a la derecha */
+        width: 85%;
+        max-width: 350px;
+        height: 100vh;
+
+        background-color: var(--color-bg-mobile-menu);
+        box-shadow: -10px 0 50px rgba(0, 0, 0, 1);
+        /* Sombra profunda izquierda */
+        border-left: 1px solid rgba(204, 163, 72, 0.2);
+
+        /* Flexbox vertical para centrar enlaces */
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5rem;
+
+        z-index: 1001;
+        /* Entre Header y Botón */
+        transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+        padding-top: 4rem;
+        /* Evitar que el primer link choque con algo arriba */
+    }
+
+    /* Clase activa para abrir menú (JS la añade) */
+    .nav-links.active {
+        right: 0;
+    }
+
+    /* 3. ESTILO ENLACES GIGANTES MÓVIL */
+    .nav-links a {
+        font-size: 2.8rem;
+        /* Muy grande y legible */
+        color: #fff;
+        text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .nav-links a:hover {
+        color: var(--color-accent-gold);
+    }
+
+    /* Animación del botón a 'X' */
+    .mobile-menu-btn.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .mobile-menu-btn.active .bar:nth-child(1) {
+        transform: translateY(10px) rotate(45deg);
+    }
+
+    .mobile-menu-btn.active .bar:nth-child(3) {
+        transform: translateY(-10px) rotate(-45deg);
+    }
+}
+
+/* Overlay Oscuro Fondo (Backdrop) */
+.mobile-nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s;
+    backdrop-filter: blur(5px);
+}
+
+.mobile-nav-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+
+/* =========================================
+   COMPONENTE: BOTONES CTA GLOBAL
+   ========================================= */
+.btn {
+    display: inline-block;
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+    cursor: pointer;
+    border: 2px solid var(--color-accent-gold);
+    padding: 1.8rem 4rem;
+    font-size: 2rem;
+    letter-spacing: 2px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin: 1rem;
+    text-align: center;
+}
+
+.btn--primary {
+    background-color: var(--color-accent-gold);
+    color: var(--color-bg-primary);
+    font-weight: 900;
+}
+
+.btn--primary:hover {
+    background-color: transparent;
+    color: var(--color-accent-gold);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(204, 163, 72, 0.3);
+}
+
+.btn--secondary {
+    color: var(--color-accent-gold);
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.btn--secondary:hover {
+    background-color: rgba(204, 163, 72, 0.2);
+    color: #fff;
+    border-color: #fff;
+}
+
+/* Indicador de Página Activa */
+.nav-links a.current-page::after {
+    width: 100%;
+}

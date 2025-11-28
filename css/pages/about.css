@@ -1,0 +1,112 @@
+/* =========================================
+   PÁGINA: SOBRE MÍ / BIO
+   ========================================= */
+
+main {
+    padding-top: 15rem;
+    min-height: 100vh;
+    padding-bottom: 5rem;
+}
+
+.about-layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    /* Columna izq pequeña, der ancha */
+    gap: 8rem;
+    align-items: start;
+}
+
+/* 1. IMAGEN DE AUTOR */
+.author-sidebar {
+    position: sticky;
+    top: 15rem;
+    /* Se queda fija mientras scrolleas el texto */
+}
+
+.profile-image-wrapper {
+    position: relative;
+    border: 1px solid var(--color-accent-gold);
+    padding: 1.5rem;
+    /* Marco estilo cuadro */
+    margin-bottom: 3rem;
+}
+
+.profile-image-wrapper img {
+    width: 100%;
+    filter: sepia(20%) contrast(110%);
+    /* Toque vintage */
+}
+
+.author-meta {
+    font-family: var(--font-heading);
+    border-top: 1px solid rgba(204, 163, 72, 0.3);
+    padding-top: 2rem;
+}
+
+.meta-label {
+    display: block;
+    font-size: 1.2rem;
+    color: var(--color-accent-gold);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.meta-value {
+    display: block;
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+}
+
+/* 2. TEXTO EDITORIAL */
+.bio-title {
+    font-family: var(--font-heading);
+    font-size: clamp(3.5rem, 5vw, 6rem);
+    line-height: 1;
+    color: var(--color-text-body);
+    margin-bottom: 4rem;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+}
+
+.bio-text {
+    font-size: 2rem;
+    line-height: 1.8;
+    margin-bottom: 3rem;
+    color: rgba(235, 214, 165, 0.9);
+    text-align: justify;
+    /* Justificado como libro */
+}
+
+/* Letra Capital (Drop Cap) */
+.drop-cap::first-letter {
+    float: left;
+    font-family: var(--font-heading);
+    font-size: 8rem;
+    line-height: 0.8;
+    padding-top: 1rem;
+    padding-right: 1.5rem;
+    color: var(--color-accent-gold);
+}
+
+.bio-actions {
+    margin-top: 5rem;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .about-layout {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+    }
+
+    .author-sidebar {
+        position: static;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    .bio-text {
+        text-align: left;
+    }
+
+    /* En móvil no justificamos para evitar ríos de espacios */
+}
