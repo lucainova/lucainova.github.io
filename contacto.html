@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contacta con Luca Inova. Colaboraciones, prensa y comunidad Los Epístoles.">
+    <title>Contacto | Luca Inova</title>
+
+    <link rel="stylesheet" href="css/core/global.css">
+    <link rel="stylesheet" href="css/core/animations.css">
+
+    <!-- Importamos estilos de Formulario -->
+    <link rel="stylesheet" href="css/pages/contact.css">
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="container nav-flex">
+            <a href="index.html" class="logo">LUCA INOVA</a>
+            <button class="mobile-menu-btn" aria-label="Menú"><span class="bar"></span><span class="bar"></span><span
+                    class="bar"></span></button>
+            <nav class="nav-links">
+                <a href="obras.html">Relatos</a>
+                <a href="visual.html">Visual</a>
+                <a href="sobre-mi.html">Sobre mí</a>
+                <!-- ACTIVO -->
+                <a href="contacto.html" class="current-page">Contacto</a>
+            </nav>
+            <div class="mobile-nav-overlay"></div>
+        </div>
+    </header>
+
+    <main>
+        <section class="container contact-section animate-fade-up">
+
+            <div class="contact-header">
+                <h1 class="page-title">No te quedes en la superficie</h1>
+                <p class="intro-text">¿Tienes una propuesta o una duda sobre el universo? Envíame un mensaje.</p>
+            </div>
+
+            <div class="form-wrapper">
+                <!-- FORMULARIO DE CONTACTO PROFESIONAL -->
+                <!-- action="URL_DE_FORMSPREE" se añadirá cuando tengas el link -->
+                <form action="https://formspree.io/f/TU_CODIGO_AQUI" method="POST" class="noir-form">
+
+                    <div class="input-group">
+                        <label for="name">Nombre</label>
+                        <input type="text" id="name" name="name" required placeholder="Tu nombre">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required placeholder="tu@email.com">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="message">Mensaje</label>
+                        <textarea id="message" name="message" rows="5" required
+                            placeholder="Escribe aquí..."></textarea>
+                    </div>
+
+                    <!-- Botón Consistente -->
+                    <button type="submit" class="btn btn--primary full-width">Enviar Mensaje</button>
+                </form>
+
+                <!-- NEWSLETTER SIDE BLOCK -->
+                <div class="newsletter-block">
+                    <h3>Comunidad <span class="gold">Los Epístoles</span></h3>
+                    <p>Recibe un micro-cuento exclusivo el primer domingo de cada mes y adelantos de portadas.</p>
+                    <div class="newsletter-cta">
+                        <!-- Botón enlace a Landing Page de suscripción o Anchor -->
+                        <span class="mock-btn">Próximamente disponible</span>
+                    </div>
+                    <div class="social-links-footer">
+                        <a href="https://instagram.com/lucainova" target="_blank">Instagram ↗</a>
+                        <a href="https://wattpad.com/user/lucainova" target="_blank">Wattpad ↗</a>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+    </main>
+
+    <script src="js/main.js" defer></script>
+</body>
+
+</html>
