@@ -7,29 +7,26 @@
     <meta name="description"
         content="El universo visual de Luca Inova. Detrás de escena, estética noir y proceso creativo.">
     <title>Visual | Luca Inova</title>
-    <!-- 1. CARGA DE FUENTES DE ALTA VELOCIDAD -->
+
+    <!-- 1. OPTIMIZACIÓN DE FUENTES -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- SOLUCIÓN: Cargamos New Rocker aquí. display=block evita el parpadeo de fuente fea -->
     <link href="https://fonts.googleapis.com/css2?family=New+Rocker&display=block" rel="stylesheet">
-    <!-- 4. ANTI-PARPADEO VISUAL OPTIMIZADO -->
-    <style>
-        /* Aplicamos el hidden a una clase .reveal, o al 'main' y 'header' 
-       directamente, NO al body, para no romper el fixed background */
 
-        /* OPCIÓN A: Si usas la estructura body > main, ocultamos solo main y header */
+    <!-- 4. ANTI-PARPADEO VISUAL -->
+    <style>
         body>header,
         body>main {
             opacity: 0;
             transition: opacity 0.5s ease;
         }
 
-        /* El estado cargado se añade por JS */
         body.loaded>header,
         body.loaded>main {
             opacity: 1;
         }
     </style>
+
     <!-- CORE CSS -->
     <link rel="stylesheet" href="css/core/global.css">
     <link rel="stylesheet" href="css/core/animations.css">
@@ -40,34 +37,24 @@
 
 <body>
 
-    <!-- HEADER GLOBAL -->
     <header class="site-header">
         <div class="container nav-flex">
-
             <a href="index.html" class="logo">LUCA INOVA</a>
-
             <button class="mobile-menu-btn" aria-label="Menú">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+                <span class="bar"></span><span class="bar"></span><span class="bar"></span>
             </button>
-
             <nav class="nav-links">
                 <a href="obras.html">Relatos</a>
-                <!-- Estado Activo Aquí -->
                 <a href="visual.html" class="current-page">Visual</a>
                 <a href="sobre_mi.html">Sobre mí</a>
                 <a href="contacto.html">Contacto</a>
             </nav>
-
             <div class="mobile-nav-overlay"></div>
         </div>
     </header>
 
     <main>
-
-        <!-- SISTEMA DE FONDO (FALTABA ESTO) -->
-        <!-- Inyectamos el fondo aquí para que no sea marrón plano -->
+        <!-- FONDO FIXED -->
         <div class="hero-bg-wrapper">
             <picture>
                 <source media="(min-width: 768px)" srcset="assets/images/hero-bg-desktop.jpg" />
@@ -76,65 +63,343 @@
         </div>
         <div class="hero-overlay"></div>
 
+        <!-- SECCIÓN 1: INTRO DECORADA -->
+        <section id="top-visual" class="visual-header animate-fade-up">
+            <!-- Decoración Flotante -->
+            <div class="feed-deco left-deco">
+                <img src="assets/images/feed-deco-left.jpg" alt="" class="img-blur">
+            </div>
+            <div class="feed-deco right-deco">
+                <img src="assets/images/feed-deco-right.jpg" alt="" class="img-blur">
+            </div>
 
-        <!-- SECCIÓN 1: INTRO ATMOSFÉRICA -->
-        <section class="visual-header animate-fade-up">
-            <div class="container text-center">
+            <div class="container text-center visual-content">
                 <span class="kicker">@lucainova</span>
                 <h1 class="page-title">Diario de Escritura</h1>
                 <p class="intro-text">
                     La narrativa no solo se lee; se observa. Fragmentos, texturas y el detrás de escena de la intriga.
                 </p>
-
-                <!-- Botón refactorizado -->
-                <a href="https://www.instagram.com/lucainova/" target="_blank" class="btn btn--primary">
+                <a id="main-insta-btn" href="https://www.instagram.com/lucainova/" target="_blank"
+                    class="btn btn--primary">
                     Seguir en Instagram
                 </a>
             </div>
         </section>
 
-        <!-- SECCIÓN 2: GRILLA MASONRY (Falso Feed) -->
-        <section class="gallery-section">
+        <!-- SECCIÓN 3: EXPEDIENTES (Cartas) -->
+        <section id="personajes" class="char-section animate-fade-up delay-1">
             <div class="container">
+                <div class="cards-grid">
 
-                <div class="insta-grid">
-
-                    <!-- POST 1 -->
-                    <a href="https://www.instagram.com/lucainova/" target="_blank"
-                        class="post-card animate-fade-up delay-1">
-                        <img src="assets/images/insta-1.jpg" alt="Post de Instagram 1">
-                        <div class="post-overlay">
-                            <span class="overlay-text">Ver Post ↗</span>
+                    <!-- MARIE -->
+                    <div class="char-card">
+                        <div class="char-card-inner">
+                            <div class="char-card-front">
+                                <img src="assets/images/char-marie.jpg" alt="Marie O. Sauvage">
+                                <div class="char-title">
+                                    <h3>Marie O. Sauvage</h3>
+                                    <span class="char-role">La Periodista</span>
+                                </div>
+                                <span class="click-hint">Click para abrir expediente +</span>
+                            </div>
+                            <div class="char-card-back">
+                                <div class="back-content">
+                                    <div class="mini-post-img lg-img">
+                                        <img src="assets/images/insta-1.jpg" alt="Le Monde D'Inova">
+                                    </div>
+                                    <span class="pillar-tag">Le Monde D'Inova</span>
+                                    <p class="pillar-desc">
+                                        Desde la Sorbona hasta el caos de Capital Federal. Cito a Foucault mientras como
+                                        fainá y explico la literatura con memes. El rigor es importante, pero el estilo
+                                        es innegociable. Voilá.
+                                    </p>
+                                    <button onclick="returnToOrigin()" class="card-btn">Volver al Origen</button>
+                                </div>
+                            </div>
                         </div>
-                    </a>
+                    </div>
 
-                    <!-- POST 2 -->
-                    <a href="https://www.instagram.com/lucainova/" target="_blank"
-                        class="post-card animate-fade-up delay-2">
-                        <img src="assets/images/insta-2.jpg" alt="Post de Instagram 2">
-                        <div class="post-overlay">
-                            <span class="overlay-text">Ver Post ↗</span>
+                    <!-- LUCA -->
+                    <div class="char-card">
+                        <div class="char-card-inner">
+                            <div class="char-card-front">
+                                <img src="assets/images/char-luca.jpg" alt="Luca Inova">
+                                <div class="char-title">
+                                    <h3>Luca Inova</h3>
+                                    <span class="char-role">El Autor</span>
+                                </div>
+                                <span class="click-hint">Click para abrir expediente +</span>
+                            </div>
+                            <div class="char-card-back">
+                                <div class="back-content">
+                                    <div class="mini-post-img lg-img">
+                                        <img src="assets/images/insta-2.jpg" alt="Caos Creativo">
+                                    </div>
+                                    <span class="pillar-tag">Caos Creativo</span>
+                                    <p class="pillar-desc">
+                                        La escritura como acto de ordenar la niebla mental. Aquí no hay gurús, solo un
+                                        explorador perdido compartiendo su bitácora de miedos, atmósferas y la búsqueda
+                                        paradójica de la identidad.
+                                    </p>
+                                    <button onclick="returnToOrigin()" class="card-btn">Volver al Origen</button>
+                                </div>
+                            </div>
                         </div>
-                    </a>
+                    </div>
 
-                    <!-- POST 3 -->
-                    <a href="https://www.instagram.com/lucainova/" target="_blank"
-                        class="post-card animate-fade-up delay-3">
-                        <img src="assets/images/insta-3.jpg" alt="Post de Instagram 3">
-                        <div class="post-overlay">
-                            <span class="overlay-text">Ver Post ↗</span>
+                    <!-- BLAISE -->
+                    <div class="char-card">
+                        <div class="char-card-inner">
+                            <div class="char-card-front">
+                                <img src="assets/images/char-blaise.jpg" alt="Blaise el Hurón">
+                                <div class="char-title">
+                                    <h3>Blaise</h3>
+                                    <span class="char-role">El Contrabandista</span>
+                                </div>
+                                <span class="click-hint">Click para abrir expediente +</span>
+                            </div>
+                            <div class="char-card-back">
+                                <div class="back-content">
+                                    <div class="mini-post-img lg-img">
+                                        <img src="assets/images/insta-3.jpg" alt="Archivos Secretos">
+                                    </div>
+                                    <span class="pillar-tag">Archivos Secretos</span>
+                                    <p class="pillar-desc">
+                                        Pff, ¿seguir las reglas? Eso es para giles. Yo me meto en la papelera de los
+                                        editores y te traigo la data que nadie te cuenta. Tips al hueso, sin chamuyo y
+                                        de contrabando.
+                                    </p>
+                                    <button onclick="returnToOrigin()" class="card-btn">Volver al Origen</button>
+                                </div>
+                            </div>
                         </div>
-                    </a>
+                    </div>
 
                 </div>
-
             </div>
         </section>
+
+        <!-- SECCIÓN 4: MINI JUEGO -->
+        <section id="minijuego" class="game-section">
+            <div class="container game-container">
+                <div class="game-console">
+                    <div class="console-header">/// DECODIFICANDO FRECUENCIA ///</div>
+                    <!-- CONTADOR DE RACHA -->
+                    <div id="streak-counter" class="streak-display">Racha: 0/5</div>
+
+                    <div class="quote-display" id="quote-display">
+                        <span class="quote-text">"Iniciando enlace encriptado..."</span>
+                    </div>
+
+                    <p class="game-instruction">Identifica la voz para desbloquear la señal.</p>
+
+                    <div class="game-controls">
+                        <button class="game-btn" onclick="checkAnswer('Marie')">Marie</button>
+                        <button class="game-btn" onclick="checkAnswer('Luca')">Luca</button>
+                        <button class="game-btn" onclick="checkAnswer('Blaise')">Blaise</button>
+                    </div>
+
+                    <div id="game-feedback" class="game-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EASTER EGG 1: MODAL DE LA PUERTA (Hidden by default) -->
+        <div id="modal-door" class="modal-overlay-custom hidden">
+            <div class="modal-content door-wrapper">
+                <h2 class="door-title">Guau, encontraste la puerta trasera...</h2>
+                <p>Veamos qué planea Luca Inova para el futuro.</p>
+                <div class="door-container" onclick="openCatacombs()">
+                    <!-- Luz que emana de la puerta (CSS) -->
+                    <div class="door-glow"></div>
+                    <img src="assets/images/secret-door.jpg" alt="Puerta Secreta" class="secret-door-img">
+                    <span class="click-to-enter">Click para entrar</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- EASTER EGG 2: LAS CATACUMBAS (Timeline) -->
+        <div id="modal-catacombs" class="modal-overlay-custom hidden catacombs-theme">
+            <!-- Botón cerrar por si se asustan -->
+            <button class="close-catacombs" onclick="closeCatacombs()">X</button>
+
+            <div class="catacombs-container">
+                <div class="candle-holder">
+                    <div class="flame"></div> <!-- Vela CSS pura -->
+                </div>
+                <h2 class="catacomb-title">Timeline Cripta</h2>
+                <p class="catacomb-subtitle">Archivos futuros detectados. No divulgar.</p>
+
+                <!-- LÍNEA DE TIEMPO -->
+                <div class="timeline">
+                    <!-- Evento 1 -->
+                    <div class="timeline-item">
+                        <span class="timeline-date">FEB 2026</span>
+                        <div class="timeline-icon">
+                            <div class="question-mark">?</div>
+                        </div>
+                        <div class="timeline-content blurred-text">Proyecto: La Sangre</div>
+                    </div>
+                    <!-- Evento 2 -->
+                    <div class="timeline-item">
+                        <span class="timeline-date">JUL 2026</span>
+                        <div class="timeline-icon">
+                            <div class="question-mark">?</div>
+                        </div>
+                        <div class="timeline-content blurred-text">Colaboración: ???</div>
+                    </div>
+                    <!-- Evento 3 -->
+                    <div class="timeline-item">
+                        <span class="timeline-date">ENE 2027</span>
+                        <div class="timeline-icon">
+                            <div class="question-mark">?</div>
+                        </div>
+                        <div class="timeline-content blurred-text">La Gran Novela</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="spacer-xl"></div>
     </main>
 
     <script src="js/main.js" defer></script>
+
+    <!-- LOGICA JUEGO Y EASTER EGGS -->
+    <script>
+        function returnToOrigin() {
+            // 1. Subir suave
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // 2. Selección de elementos a iluminar
+            const decorations = document.querySelectorAll('.img-blur'); // Ojo: clase img-blur es la que tiene la imagen visible
+            const mainBtn = document.getElementById('main-insta-btn');
+
+            // 3. Ejecutar flash visual tras scroll
+            setTimeout(() => {
+                mainBtn.classList.add('pulse-attention');
+                decorations.forEach(img => {
+                    img.style.transition = 'none'; // Quitar transición suave para el golpe
+                    img.classList.add('pulse-deco');
+                });
+
+                // 4. Limpieza (Reset)
+                setTimeout(() => {
+                    mainBtn.classList.remove('pulse-attention');
+                    decorations.forEach(img => {
+                        img.style.transition = ''; // Restaurar transición
+                        img.classList.remove('pulse-deco');
+                    });
+                }, 1000);
+            }, 800);
+        }
+
+        /* --- BASE DE DATOS EXTENDIDA (Sprint 1) --- */
+        const quotes = [
+            // Marie
+            { text: "Explicar a Kant en un carrusel de 10 slides es mi infierno personal.", author: "Marie" },
+            { text: "¿Fainá fría o caliente? El verdadero debate filosófico que Hegel ignoró.", author: "Marie" },
+            { text: "El algoritmo exige brevedad; mi formación exige contexto. C'est la guerre.", author: "Marie" },
+            { text: "La crisis del 2001 tuvo más plot twists que toda la bibliografía de Stephen King.", author: "Marie" },
+            // Blaise
+            { text: "Te la hago corta: si pagaste por ese curso, te vieron la cara de gil.", author: "Blaise" },
+            { text: "El bloqueo de escritor no existe, lo que existe es la falta de hambre.", author: "Blaise" },
+            { text: "Shhh. Robé este PDF de la editorial. Bajalo antes de que me rastreen.", author: "Blaise" },
+            { text: "La 'inspiración' es un chamuyo de los que no quieren laburar la trama.", author: "Blaise" },
+            // Luca
+            { text: "No busco que entiendas el miedo, busco que sientas el frío en la nuca.", author: "Luca" },
+            { text: "La página en blanco no está vacía; está llena de lo que no te atreves a decir.", author: "Luca" },
+            { text: "Somos los fantasmas de las historias que aún no escribimos.", author: "Luca" },
+            { text: "Esa sensación de caída libre a las 3 AM... esa es mi tinta.", author: "Luca" }
+        ];
+
+        let currentQuote = {};
+        let streak = 0; // CONTADOR DE RACHA (Easter Egg Trigger)
+
+        function updateStreak() {
+            document.getElementById('streak-counter').innerText = `Racha: ${streak}/5`;
+        }
+
+        function loadNewQuote() {
+            const display = document.querySelector('#quote-display .quote-text');
+            const feedback = document.getElementById('game-feedback');
+
+            // Si ya ganaste, no carga más (bloqueo por puerta)
+            if (streak >= 5) return;
+
+            display.style.opacity = 0;
+            setTimeout(() => {
+                const randomIndex = Math.floor(Math.random() * quotes.length);
+                currentQuote = quotes[randomIndex];
+                display.innerText = `"${currentQuote.text}"`;
+                display.style.opacity = 1;
+                feedback.innerText = "";
+                feedback.className = "game-feedback";
+            }, 300);
+        }
+
+        function checkAnswer(selectedAuthor) {
+            if (streak >= 5) return; // Juego terminado
+
+            const feedback = document.getElementById('game-feedback');
+
+            if (selectedAuthor === currentQuote.author) {
+                feedback.innerHTML = `<span style='color: var(--color-accent-gold)'>★ SINTONÍA CORRECTA.</span>`;
+                feedback.classList.add('success');
+                streak++;
+                updateStreak();
+
+                if (streak === 5) {
+                    setTimeout(triggerEasterEgg, 1000); // Lanzar evento
+                } else {
+                    setTimeout(loadNewQuote, 1500);
+                }
+
+            } else {
+                streak = 0; // Reiniciar racha por error
+                updateStreak();
+
+                let insult = "";
+                if (currentQuote.author === "Blaise") insult = "Blaise se ríe: 'Pff, cualquiera'. (Racha reiniciada)";
+                if (currentQuote.author === "Marie") insult = "Marie suspira: 'Mon dieu...'. (Racha reiniciada)";
+                if (currentQuote.author === "Luca") insult = "Luca calla. (Racha reiniciada)";
+                feedback.innerHTML = `<span style='color: #bd4b4b'>⚠ ERROR. ${insult}</span>`;
+                feedback.classList.add('error');
+            }
+        }
+
+        /* --- LÓGICA DE EASTER EGGS (Sprint 4) --- */
+        function triggerEasterEgg() {
+            // Abrir Modal de Puerta
+            const modalDoor = document.getElementById('modal-door');
+            modalDoor.classList.remove('hidden');
+            modalDoor.classList.add('active');
+        }
+
+        function openCatacombs() {
+            // Cerrar puerta, abrir catacumbas
+            const modalDoor = document.getElementById('modal-door');
+            const modalCatacombs = document.getElementById('modal-catacombs');
+
+            modalDoor.classList.remove('active');
+            setTimeout(() => modalDoor.classList.add('hidden'), 500);
+
+            modalCatacombs.classList.remove('hidden');
+            setTimeout(() => modalCatacombs.classList.add('active'), 100);
+        }
+
+        function closeCatacombs() {
+            const modalCatacombs = document.getElementById('modal-catacombs');
+            modalCatacombs.classList.remove('active');
+            setTimeout(() => modalCatacombs.classList.add('hidden'), 500);
+            // Reiniciar juego opcionalmente
+            streak = 0;
+            updateStreak();
+            loadNewQuote();
+        }
+
+        window.addEventListener('load', loadNewQuote);
+    </script>
 </body>
 
 </html>

@@ -27,7 +27,7 @@
 .hero-subtitle {
     font-family: var(--font-heading);
     display: block;
-    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    font-size: clamp(2.1rem, 3vw, 3rem);
     letter-spacing: 0.6rem;
     color: var(--color-accent-gold);
     margin-bottom: 2.5rem;
@@ -39,7 +39,7 @@
     font-family: var(--font-heading);
     text-transform: uppercase;
     color: var(--color-text-body);
-    font-size: clamp(3.8rem, 7vw, 8rem);
+    font-size: clamp(3.8rem, 7vw, 6.8rem);
     line-height: 1.1;
     margin-bottom: 5rem;
     text-shadow: 0 5px 15px rgba(0, 0, 0, 0.9);
